@@ -10,10 +10,9 @@ public class SongList
 
    public SongList ()
    {
-      ArrayList<Song> recordList1 = new ArrayList<Song>();
-      ArrayList<String> nameList = new ArrayList<String>();
-      this.nameList = nameList;
-      this.recordList = recordList1;
+
+      this.nameList = new ArrayList<String>();
+      this.recordList = new ArrayList<Song>();
    }
 
    public void add (Song song)

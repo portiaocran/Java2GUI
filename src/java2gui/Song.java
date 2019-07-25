@@ -25,6 +25,14 @@ public class Song
 //      this.songTitle = songTitle;
 //   }
 
+   public Song (String songTitle, String songArtist, Genre genre, double year)
+   {
+      this.songTitle = songTitle;
+      this.songArtist = songArtist;
+      this.genre = genre;
+      this.year = year;
+   }
+
    public Song (String songTitle, String songArtist, String songAlbum, Genre genre, double year)
    {
       this.songTitle = songTitle;
@@ -209,8 +217,12 @@ public class Song
 
    public Song ()
    {
-      // TODO - implement Record.Record
-      throw new UnsupportedOperationException();
+
+   }
+
+   public Song (String songTitle)
+   {
+      this.songTitle = songTitle;
    }
 
 
