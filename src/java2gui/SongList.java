@@ -1,17 +1,19 @@
 package java2gui;
 import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 /**
  * @author Portia Ocran
  */
 public class SongList
 {
    private ArrayList<Song> recordList;
-   private ArrayList<String> nameList;
+   private ObservableList<String> nameList;
 
    public SongList ()
    {
 
-      this.nameList = new ArrayList<String>();
+      this.nameList = FXCollections.observableArrayList();
       this.recordList = new ArrayList<Song>();
    }
 
@@ -33,12 +35,12 @@ public class SongList
       this.recordList = recordList;
    }
 
-   public ArrayList<String> getNameList ()
+   public ObservableList<String> getNameList ()
    {
       return nameList;
    }
 
-   public void setNameList (ArrayList<String> nameList)
+   public void setNameList (ObservableList<String> nameList)
    {
       this.nameList = nameList;
    }

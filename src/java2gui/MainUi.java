@@ -1,6 +1,5 @@
 package java2gui;
 
-import java.util.ArrayList;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -22,10 +21,13 @@ import javafx.stage.Stage;
 
 public class MainUi extends Application
 {
+
+
+   SongList songList = new SongList();
+
    @Override
    public void start (Stage primaryStage)
    {
-      SongList songList = new SongList();
 
       Label jB = new Label("JuxeBox Manager");
       Font font1 = new Font("Sans Serif", 50.0);
@@ -63,13 +65,6 @@ public class MainUi extends Application
 
       songList.add(new Song("Song", "Vadym", "Weights", Genre.BLUES, 2009));
 
-      songList.getRecordList().get(2).setPlays(100);
-
-
-      ListView<String> lv = new ListView<>(FXCollections.observableArrayList(songList.getNameList()));
-      lv.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-
-
       //Buttons
       Button btAddInfo = new Button("Additional Info");
       btAddInfo.setFont(new Font("Sans Serif", 15));
@@ -79,6 +74,37 @@ public class MainUi extends Application
       btSearch.setFont(new Font("Sans Serif", 15));
       Button btEdit = new Button("Edit");
       btEdit.setFont(new Font("Sans Serif", 15));
+
+      ListView<String> lv = new ListView<>(FXCollections.observableArrayList());
+      lv.setItems(songList.getNameList());
+      lv.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+      lv.prefHeightProperty().bind(pane.heightProperty().subtract(5)); //binding width and height of scrollbar to Scene
+      lv.prefWidthProperty().bind(pane.widthProperty().divide(3));
+
+
+      lv.getSelectionModel().selectedItemProperty().addListener( //controls main screen. if user selects song, information appears on screen
+              ov -> {
+                 for (Integer i : lv.getSelectionModel().getSelectedIndices()) {
+                    btAddInfo.setOnAction(e -> addInfo(songList.getRecordList().get(i))); //Process Events for additional Information button
+                    if ((songList.getRecordList().get(i).getGenre()) == null) {
+                       tfGenre.setText("------");
+                    }
+                    else {
+                       tfGenre.setText("Genre:" + songList.getRecordList().get(i).getGenre().name());
+                    }
+
+                    if ((songList.getRecordList().get(i).getAlbumName() == null)) {
+                       tfAlbum.setText("------");
+                    }
+                    else {
+                       tfGenre.setText(songList.getRecordList().get(i).getGenre().name());
+                    }
+
+                    tfArtist.setText(songList.getRecordList().get(i).getSongArtist());
+                    tfSong.setText(songList.getRecordList().get(i).getSongTitle());
+                 }
+                 lv.refresh();
+              });
 
       //set Padding for both Hboxes holding buttons
 //      buttons.setPadding(new Insets(11, 11, 11, 11));
@@ -114,34 +140,6 @@ public class MainUi extends Application
       vb.getChildren().add(buttons2);
 
 
-
-      lv.prefHeightProperty().bind(pane.heightProperty().subtract(5)); //binding width and height of scrollbar to Scene
-      lv.prefWidthProperty().bind(pane.widthProperty().divide(3));
-
-
-      lv.getSelectionModel().selectedItemProperty().addListener( //controls main screen. if user selects song, information appears on screen
-              ov -> {
-                 for (Integer i : lv.getSelectionModel().getSelectedIndices()) {
-                    btAddInfo.setOnAction(e -> addInfo(songList.getRecordList().get(i))); //Process Events for additional Information button
-                    if ((songList.getRecordList().get(i).getGenre()) == null) {
-                       tfGenre.setText("------");
-                    }
-                    else {
-                       tfGenre.setText("Genre:" + songList.getRecordList().get(i).getGenre().name());
-                    }
-
-                    if ((songList.getRecordList().get(i).getAlbumName() == null)) {
-                       tfAlbum.setText("------");
-                    }
-                    else {
-                       tfGenre.setText(songList.getRecordList().get(i).getGenre().name());
-                    }
-
-                    tfArtist.setText(songList.getRecordList().get(i).getSongArtist());
-                    tfSong.setText(songList.getRecordList().get(i).getSongTitle());
-                 }
-              });
-
       pane.setRight(vb); // placing all others nodes on right
       pane.setLeft(sp2); //placing scroll bar on left
       sp2.setAlignment(Pos.TOP_LEFT);
@@ -151,9 +149,7 @@ public class MainUi extends Application
       primaryStage.setTitle("JukeBox Manager - Main Screen"); // Set the stage title
       primaryStage.setScene(scene); // Place the scene in the stage
       primaryStage.show(); // Display the stage
-      btAddNew.setOnAction(e -> addSong(songList.getRecordList(), primaryStage));
-//
-      //Process Events for additional Information button
+      btAddNew.setOnAction(e -> addSong(primaryStage));
    }
 
    //Additional Information method. When user selects additional info, a new window opens with more detailed information regarding song
@@ -281,13 +277,13 @@ public class MainUi extends Application
 
    }
 
-   private void addSong (ArrayList<Song> songList2, Stage stage)
+   private void addSong (Stage stage)
    {
 
-      TextField artistAS = new TextField();   // text field values
+      TextField artistAS = new TextField("Required");   // text field values
       TextField albumAS = new TextField();
-      TextField songAS = new TextField();
-      TextField genreAS = new TextField();
+      TextField songAS = new TextField("Required");
+      TextField genreAS = new TextField("Required");
       TextField yearAS = new TextField();
       TextField priceAS = new TextField();   // text field values
       TextField explicitAS = new TextField();
@@ -300,13 +296,7 @@ public class MainUi extends Application
       TextField countryAS = new TextField();
       TextField videoAS = new TextField();
 
-      if (songAS.getText() != null) {
-         String Title = songAS.getText();
-         Song song = new Song(Title);
-      }
 
-
-      //      Button btAddSong = new Button("Add");
       Stage stageAS = new Stage(); //new stage that will appear after clicking additional info button
       GridPane gridPaneAS = new GridPane();
       Label AI = new Label("Add Song"); //Title
@@ -396,22 +386,23 @@ public class MainUi extends Application
       stageAS.setScene(scene2); // Place the scene in the stage
       stageAS.show(); // Display the stage
 
-      btExitAS.setOnAction(e -> saveSong(stageAS, stage, songList2));
 
+      btExitAS.setOnAction(e -> {
+         {
+            String title = songAS.getText();
+            String artist = artistAS.getText();
+            Song song = new Song(title, artist);
+            songList.add(song);
+            stageAS.close();
+            for (int i = 0; i < songList.getRecordList().size(); i++) {
+               System.out.println(songList.getRecordList().get(i).getSongTitle());
+            }
+            stage.show();
+
+         }
+      });
 
    }
-
-   private void saveSong (Stage stage, Stage stage2, ArrayList<Song> recordList)
-   {
-
-      stage.close();
-      for (int i = 0; i < recordList.size(); i++) {
-         System.out.println(recordList.get(i));
-      }
-      stage2.show();
-
-   }
-
 
    public static void main (String[] args) //main method to run program
    {

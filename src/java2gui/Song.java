@@ -73,9 +73,7 @@ public class Song
 
    public String getSongArtist ()
    {
-      if (this.songArtist.isEmpty()) {
-         return "------";
-      }
+
       return songArtist;
    }
 
