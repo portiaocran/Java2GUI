@@ -3,6 +3,7 @@ package java2gui;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
+import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -25,67 +27,73 @@ public class MainUi extends Application
 
    SongList songList = new SongList();
 
+   Button btAddInfo = new Button("Additional Info");
+   Button btAddNew = new Button("Add New");
+   Button btSearch = new Button("Search");
+   Button btEdit = new Button("Edit");
+
+
    @Override
    public void start (Stage primaryStage)
    {
 
-      Label jB = new Label("JuxeBox Manager");
-      Font font1 = new Font("Sans Serif", 50.0);
+      Label jB = new Label("JuxeBox Manager"); //Label for Main Screen
+      jB.setFont(new Font("Sans Serif", 50.0));
 
-      BorderPane pane = new BorderPane(); //main pane
+
+      BorderPane pane = new BorderPane(); //MAIN PANE!
       pane.setPadding(new Insets(15, 20, 20, 15)); //padding for main pane
 
-      GridPane gridPane = new GridPane(); //grid pane to hold textfields and labels
+      GridPane gridPane = new GridPane(); //Gridpane for buttons and labels
       gridPane.setPadding(new Insets(12, 13, 14, 15));
 
       TextField tfArtist = new TextField(); //Textfields for main screen
+      tfArtist.setEditable(false);
+      tfArtist.prefWidthProperty().bind(gridPane.widthProperty().divide(1.5)); //Bind textfield to 
       TextField tfAlbum = new TextField();
+      tfAlbum.setEditable(false);
       TextField tfSong = new TextField();
+      tfSong.setEditable(false);
       TextField tfGenre = new TextField();
+      tfGenre.setEditable(false);
 
       gridPane.setHgap(5);
       gridPane.setVgap(5);
-      gridPane.add(new Label("Artist : "), 0, 0);
-      gridPane.add(tfArtist, 1, 0);
+      gridPane.add(new Label("Song : "), 0, 0);
+      gridPane.add(tfSong, 1, 0);
       gridPane.add(new Label("Album: "), 0, 1);
       gridPane.add(tfAlbum, 1, 1);
-      gridPane.add(new Label("Song: "), 0, 2);
-      gridPane.add(tfSong, 1, 2);
+      gridPane.add(new Label("Artist: "), 0, 2);
+      gridPane.add(tfArtist, 1, 2);
       gridPane.add(new Label("Genre: "), 0, 3);
       gridPane.add(tfGenre, 1, 3);
 
-
-      tfArtist.prefWidthProperty().bind(gridPane.widthProperty().divide(1.5)); //binding text fields to scene
-
-
-      jB.setFont(font1);
 
       songList.add(new Song("Jesus Walks", "Kanye West"));
       songList.add(new Song("Heard Em Say", "Kanye West"));
 
       songList.add(new Song("Song", "Vadym", "Weights", Genre.BLUES, 2009));
 
-      //Buttons
-      Button btAddInfo = new Button("Additional Info");
+      //Buttons for main Jukebox screen
+//      Button btAddInfo = new Button("Additional Info");
       btAddInfo.setFont(new Font("Sans Serif", 15));
-      Button btAddNew = new Button("Add New");
+//      Button btAddNew = new Button("Add New");
       btAddNew.setFont(new Font("Sans Serif", 15));
-      Button btSearch = new Button("Search");
+//      Button btSearch = new Button("Search");
       btSearch.setFont(new Font("Sans Serif", 15));
-      Button btEdit = new Button("Edit");
+//      Button btEdit = new Button("Edit");
       btEdit.setFont(new Font("Sans Serif", 15));
 
-      ListView<String> lv = new ListView<>(FXCollections.observableArrayList());
+      ListView<String> lv = new ListView<>(FXCollections.observableArrayList()); //New Listivew which will track NameList that contains strings for song name and artist
       lv.setItems(songList.getNameList());
       lv.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
       lv.prefHeightProperty().bind(pane.heightProperty().subtract(5)); //binding width and height of scrollbar to Scene
       lv.prefWidthProperty().bind(pane.widthProperty().divide(3));
 
-
       lv.getSelectionModel().selectedItemProperty().addListener( //controls main screen. if user selects song, information appears on screen
               ov -> {
                  for (Integer i : lv.getSelectionModel().getSelectedIndices()) {
-                    btAddInfo.setOnAction(e -> addInfo(songList.getRecordList().get(i))); //Process Events for additional Information button
+                    btAddInfo.setOnAction(e -> addInfo(songList.getRecordList().get(i), primaryStage)); //Process Events for additional Information button
                     if ((songList.getRecordList().get(i).getGenre()) == null) {
                        tfGenre.setText("------");
                     }
@@ -99,7 +107,6 @@ public class MainUi extends Application
                     else {
                        tfGenre.setText(songList.getRecordList().get(i).getGenre().name());
                     }
-
                     tfArtist.setText(songList.getRecordList().get(i).getSongArtist());
                     tfSong.setText(songList.getRecordList().get(i).getSongTitle());
                  }
@@ -144,33 +151,49 @@ public class MainUi extends Application
       pane.setLeft(sp2); //placing scroll bar on left
       sp2.setAlignment(Pos.TOP_LEFT);
       Scene scene = new Scene(pane, 700, 450);
-
+      pane.setStyle("-fx-background-color: pink");
 
       primaryStage.setTitle("JukeBox Manager - Main Screen"); // Set the stage title
       primaryStage.setScene(scene); // Place the scene in the stage
       primaryStage.show(); // Display the stage
       btAddNew.setOnAction(e -> addSong(primaryStage));
+      btSearch.setOnAction(l -> searchSong());
    }
 
    //Additional Information method. When user selects additional info, a new window opens with more detailed information regarding song
-   private void addInfo (Song song)
+   private void addInfo (Song song, Stage stage)
    {
       // Get values from text fields
       TextField artistAI = new TextField();   // text field values
+      artistAI.setEditable(false);
       TextField albumAI = new TextField();
+      albumAI.setEditable(false);
       TextField songAI = new TextField();
+      songAI.setEditable(false);
       TextField genreAI = new TextField();
+      genreAI.setEditable(false);
       TextField yearAI = new TextField();
+      yearAI.setEditable(false);
       TextField priceAI = new TextField();   // text field values
+      priceAI.setEditable(false);
       TextField explicitAI = new TextField();
+      explicitAI.setEditable(false);
       TextField catNumAI = new TextField();
+      catNumAI.setEditable(false);
       TextField playsAI = new TextField();
+      playsAI.setEditable(false);
       TextField ratingAI = new TextField();
+      ratingAI.setEditable(false);
       TextField sizeAI = new TextField();   // text field values
+      sizeAI.setEditable(false);
       TextField lengthAI = new TextField();
+      lengthAI.setEditable(false);
       TextField idAI = new TextField();
+      idAI.setEditable(false);
       TextField countryAI = new TextField();
+      countryAI.setEditable(false);
       TextField videoAI = new TextField();
+      videoAI.setEditable(false);
 //      Button btAddSong = new Button("Add");
       Stage stageAI = new Stage(); //new stage that will appear after clicking additional info button
       GridPane gridPaneAI = new GridPane();
@@ -264,18 +287,24 @@ public class MainUi extends Application
 
       }
 
-
-
-
-
       // Create a scene and place it in the stage
-      Scene scene2 = new Scene(paneAI, 600, 500);
+      Scene scene2 = new Scene(paneAI, 700, 450);
       stageAI.setTitle("Additional Information"); // Set title
       stageAI.setScene(scene2); // Place the scene in the stage
       stageAI.show(); // Display the stage
+      btCancelAI.setOnAction(g -> {
+         stageAI.close();
+         stage.show();
+      });
 
-
+      btAddNewAI.setOnAction(e -> addSong(stage));
+      btExitAI.setOnAction(p -> {
+         stageAI.close();
+         stage.show();
+      }
+      );
    }
+
 
    private void addSong (Stage stage)
    {
@@ -352,10 +381,6 @@ public class MainUi extends Application
       btCancelAS.setFont(new Font("Sans Serif", 12));
 
       //Retrieve text from user, store in variable and create song object with given attributes
-
-
-
-
       GridPane gpAS = new GridPane();
       gpAS.setHgap(30);
       gpAS.setVgap(15);
@@ -381,7 +406,7 @@ public class MainUi extends Application
 
 
       // Create a scene and place it in the stage
-      Scene scene2 = new Scene(paneAS, 600, 500);
+      Scene scene2 = new Scene(paneAS, 700, 450);
       stageAS.setTitle("JukeBox Manager"); // Set title
       stageAS.setScene(scene2); // Place the scene in the stage
       stageAS.show(); // Display the stage
@@ -404,146 +429,36 @@ public class MainUi extends Application
 
    }
 
+   private void searchSong ()
+   {
+
+      BorderPane paneSearch = new BorderPane();
+      Pane labelPane = new Pane();
+      Label searchL = new Label("Search Song"); //Label to for search song window
+      searchL.setFont(new Font("Sans Serif", 50));
+
+      labelPane.getChildren().add(searchL);
+
+      paneSearch.setCenter(labelPane);
+
+
+
+
+
+      Stage searchStage = new Stage();
+
+      Scene searchScene = new Scene(paneSearch, 700, 450);
+      searchScene.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+      searchStage.setScene(searchScene);
+      searchStage.setTitle("JuxeBox - Search Song");
+      searchStage.show();
+
+
+   }
+
    public static void main (String[] args) //main method to run program
    {
       launch(args);
    }
 
 }
-
-
-
-//
-
-//
-
-//
-//   
-//
-//}
-//
-//   private void calculateLoanPayment ()
-//   {
-//      // Get values from text fields
-//      String songTitle = song.getText();
-//      String songArtist = artist.getText();
-//      Genre genre = Genre.valueOf(tfgenre.getText());
-//      double songYear = Double.parseDouble(year.getText());
-//
-//      // Create a loan object. Loan defined in Listing 10.2
-//      Song song = new Song(songTitle, songArtist, genre, songYear);
-//
-//
-//      songList.recordList.add(song);
-//
-////      for (int i = 0; i < songList.recordList.size(); i++) {
-////         if (songList.recordList.isEmpty()) {
-////            System.out.println("The songlist is empty");
-////         }
-////         else {
-//      System.out.println(songList.recordList.get((songList.recordList.indexOf(song))).getSongTitle());
-//
-//}
-//}
-//       Display monthly payment and total payment
-//
-//   }
-//
-//         songList.recordList.add(song);
-//      for (int i = 0; i < songList.recordList.size(); i++) {
-//         if (songList.recordList.isEmpty()) {
-//            System.out.println("The songlist is empty");
-//         }
-//         else {
-//         System.out.println(songList.recordList.get((songList.recordList.indexOf(song))).getSongTitle());
-//         }
-//      }
-//      // Display monthly payment and total payment
-//      }
-//private TextField artist = new TextField();
-//   private TextField album = new TextField();
-//   private TextField song = new TextField();
-//   private TextField tfgenre = new TextField();
-//   private TextField year = new TextField();
-//   private Button btAddSong = new Button("Add");
-//
-//   @Override // Override the start method in the Application class
-//        public void start (Stage primaryStage)
-//   {
-//      // Create UI
-//      GridPane gridPane = new GridPane();
-//
-////      StackPane stackPane = new StackPane();
-////      Label l1 = new Label("JuxeBox Manager");
-//
-//
-////      gridPane.getChildren().add(l1);
-//      gridPane.setHgap(5);
-//      gridPane.setVgap(5);
-//      gridPane.add(new Label("Artist : "), 0, 0);
-//      gridPane.add(artist, 1, 0);
-//      gridPane.add(new Label("Album: "), 0, 1);
-//      gridPane.add(album, 1, 1);
-//      gridPane.add(new Label("Song: "), 0, 2);
-//      gridPane.add(song, 1, 2);
-//      gridPane.add(new Label("Genre: "), 0, 3);
-//      gridPane.add(tfgenre, 1, 3);
-//      gridPane.add(new Label("Year: "), 0, 4);
-//      gridPane.add(year, 1, 4);
-//      gridPane.add(btAddSong, 1, 5);
-//      gridPane.setPadding(new Insets(12, 13, 14, 15));
-//
-//
-//
-//      // Set properties for UI
-//      gridPane.setAlignment(Pos.CENTER_LEFT);
-////      l1.setAlignment(Pos.TOP_RIGHT);
-////      artist.setAlignment(Pos.BOTTOM_RIGHT);
-////      album.setAlignment(Pos.BOTTOM_RIGHT);
-////      song.setAlignment(Pos.BOTTOM_RIGHT);
-////      tfgenre.setAlignment(Pos.BOTTOM_RIGHT);
-////      year.setAlignment(Pos.BOTTOM_RIGHT);
-////      tfMonthlyPayment.setEditable(false);
-////      tfTotalPayment.setEditable(false);
-//      GridPane.setHalignment(btAddSong, HPos.RIGHT);
-//
-//      // Process events
-//      btAddSong.setOnAction(e -> calculateLoanPayment());
-//
-//      // Create a scene and place it in the stage
-//      Scene scene = new Scene(gridPane, 450, 300);
-//      primaryStage.setTitle("LoanCalculator"); // Set title
-//      primaryStage.setScene(scene); // Place the scene in the stage
-//      primaryStage.show(); // Display the stage
-//   }
-//
-//   private void calculateLoanPayment ()
-//   {
-//      // Get values from text fields
-//      String songTitle = song.getText();
-//      String songArtist = artist.getText();
-//      Genre genre = Genre.valueOf(tfgenre.getText());
-//      double songYear = Double.parseDouble(year.getText());
-//
-//      // Create a loan object. Loan defined in Listing 10.2
-//      Song song = new Song(songTitle, songArtist, genre, songYear);
-//
-//
-//      songList.recordList.add(song);
-//
-////      for (int i = 0; i < songList.recordList.size(); i++) {
-////         if (songList.recordList.isEmpty()) {
-////            System.out.println("The songlist is empty");
-////         }
-////         else {
-//      System.out.println(songList.recordList.get((songList.recordList.indexOf(song))).getSongTitle());
-//
-////         }
-////      }
-////      // Display monthly payment and total payment
-//
-//   }
-/**
- * The main method is only needed for the IDE with limited
- * JavaFX support. Not needed for running from the command line.
- */
