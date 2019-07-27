@@ -3,12 +3,12 @@ package java2gui;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
-import javafx.geometry.NodeOrientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
@@ -19,13 +19,15 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class MainUi extends Application
 {
 
+   //created instance variable for the arraylist and buttons on main stage so they can be accessed throughout all methods
 
-   SongList songList = new SongList();
+   SongList songList = new SongList(); // Main ArrayList to track songs
 
    Button btAddInfo = new Button("Additional Info");
    Button btAddNew = new Button("Add New");
@@ -36,6 +38,11 @@ public class MainUi extends Application
    @Override
    public void start (Stage primaryStage)
    {
+      //font for buttons
+      btAddInfo.setFont(new Font("Sans Serif", 15));
+      btAddNew.setFont(new Font("Sans Serif", 15));
+      btSearch.setFont(new Font("Sans Serif", 15));
+      btEdit.setFont(new Font("Sans Serif", 15));
 
       Label jB = new Label("JuxeBox Manager"); //Label for Main Screen
       jB.setFont(new Font("Sans Serif", 50.0));
@@ -57,7 +64,7 @@ public class MainUi extends Application
       TextField tfGenre = new TextField();
       tfGenre.setEditable(false);
 
-      gridPane.setHgap(5);
+      gridPane.setHgap(5); //Adding nodes to gridPane
       gridPane.setVgap(5);
       gridPane.add(new Label("Song : "), 0, 0);
       gridPane.add(tfSong, 1, 0);
@@ -69,20 +76,10 @@ public class MainUi extends Application
       gridPane.add(tfGenre, 1, 3);
 
 
-      songList.add(new Song("Jesus Walks", "Kanye West"));
+      songList.add(new Song("Jesus Walks", "Kanye West"));  // added songs to list to test functionality, will remove
       songList.add(new Song("Heard Em Say", "Kanye West"));
 
       songList.add(new Song("Song", "Vadym", "Weights", Genre.BLUES, 2009));
-
-      //Buttons for main Jukebox screen
-//      Button btAddInfo = new Button("Additional Info");
-      btAddInfo.setFont(new Font("Sans Serif", 15));
-//      Button btAddNew = new Button("Add New");
-      btAddNew.setFont(new Font("Sans Serif", 15));
-//      Button btSearch = new Button("Search");
-      btSearch.setFont(new Font("Sans Serif", 15));
-//      Button btEdit = new Button("Edit");
-      btEdit.setFont(new Font("Sans Serif", 15));
 
       ListView<String> lv = new ListView<>(FXCollections.observableArrayList()); //New Listivew which will track NameList that contains strings for song name and artist
       lv.setItems(songList.getNameList());
@@ -113,9 +110,6 @@ public class MainUi extends Application
                  lv.refresh();
               });
 
-      //set Padding for both Hboxes holding buttons
-//      buttons.setPadding(new Insets(11, 11, 11, 11));
-//      buttons2.setPadding(new Insets(11, 11, 11, 11));
       HBox buttons = new HBox(10); //pane for first row of buttons
       HBox buttons2 = new HBox(10); //second pane for second row of buttons
       //Add buttons to Hboxes
@@ -146,12 +140,11 @@ public class MainUi extends Application
       vb.getChildren().add(buttons);
       vb.getChildren().add(buttons2);
 
-
       pane.setRight(vb); // placing all others nodes on right
       pane.setLeft(sp2); //placing scroll bar on left
       sp2.setAlignment(Pos.TOP_LEFT);
       Scene scene = new Scene(pane, 700, 450);
-      pane.setStyle("-fx-background-color: pink");
+//      pane.setStyle("-fx-background-color: ");
 
       primaryStage.setTitle("JukeBox Manager - Main Screen"); // Set the stage title
       primaryStage.setScene(scene); // Place the scene in the stage
@@ -210,7 +203,6 @@ public class MainUi extends Application
 
       StackPane paneTi = new StackPane(); //stackpane created to hold title
 
-
       gridPaneAI.add(new Label("Artist : "), 0, 0);
       gridPaneAI.add(artistAI, 1, 0);
       gridPaneAI.add(new Label("Album: "), 0, 1);
@@ -266,7 +258,6 @@ public class MainUi extends Application
       gpAI.add(btExitAI, 5, 0);
       gpAI.add(btCancelAI, 5, 1);
 
-
       paneTi.getChildren().add(AI);
 
       paneAI.setTop(paneTi);
@@ -283,8 +274,6 @@ public class MainUi extends Application
       }
       else {
          genreAI.setText(song.getGenre().name());
-
-
       }
 
       // Create a scene and place it in the stage
@@ -305,28 +294,26 @@ public class MainUi extends Application
       );
    }
 
-
+// Method to add song. If users selects add song button, they will enter another screen where they can then add a new song to the playlist
    private void addSong (Stage stage)
    {
-
       TextField artistAS = new TextField("Required");   // text field values
       TextField albumAS = new TextField();
       TextField songAS = new TextField("Required");
       TextField genreAS = new TextField("Required");
       TextField yearAS = new TextField();
-      TextField priceAS = new TextField();   // text field values
+      TextField priceAS = new TextField();
       TextField explicitAS = new TextField();
       TextField catNumAS = new TextField();
       TextField playsAS = new TextField();
       TextField ratingAS = new TextField();
-      TextField sizeAS = new TextField();   // text field values
+      TextField sizeAS = new TextField();
       TextField lengthAS = new TextField();
       TextField idAS = new TextField();
       TextField countryAS = new TextField();
       TextField videoAS = new TextField();
 
-
-      Stage stageAS = new Stage(); //new stage that will appear after clicking additional info button
+      Stage stageAS = new Stage(); //new stage that will appear after clicking add song info button
       GridPane gridPaneAS = new GridPane();
       Label AI = new Label("Add Song"); //Title
       Font fontAI = new Font("Sans Serif", 50.0);
@@ -340,7 +327,7 @@ public class MainUi extends Application
       artistAS.prefWidthProperty().bind(paneAS.widthProperty().subtract(150)); //binding text field width to screen width
 
       StackPane paneTi = new StackPane(); //stackpane created to hold title
-
+      //adding buttons to gridpane
       gridPaneAS.add(new Label("Artist : "), 0, 0);
       gridPaneAS.add(artistAS, 1, 0);
       gridPaneAS.add(new Label("Album: "), 0, 1);
@@ -361,7 +348,7 @@ public class MainUi extends Application
       gridPaneAS.add(playsAS, 1, 8);
       gridPaneAS.add(new Label("Rating: "), 0, 9);
       gridPaneAS.add(ratingAS, 1, 9);
-//      gridPaneAI.add(btAddSong, 1, 5);
+      //gridPaneAI.add(btAddSong, 1, 5);
 
       Button btAddNewAS = new Button("Add New");
       btAddNewAS.setFont(new Font("Sans Serif", 12));
@@ -375,8 +362,8 @@ public class MainUi extends Application
       btDeleteAS.setFont(new Font("Sans Serif", 12));
       Button btPrevAS = new Button("Prev");
       btPrevAS.setFont(new Font("Sans Serif", 12));
-      Button btExitAS = new Button("Save");
-      btExitAS.setFont(new Font("Sans Serif", 12));
+      Button btSaveAs = new Button("Save");
+      btSaveAs.setFont(new Font("Sans Serif", 12));
       Button btCancelAS = new Button("Cancel");
       btCancelAS.setFont(new Font("Sans Serif", 12));
 
@@ -394,9 +381,8 @@ public class MainUi extends Application
       gpAS.add(btNextAS, 1, 1);
       gpAS.add(btDeleteAS, 4, 0);
       gpAS.add(btPrevAS, 4, 1);
-      gpAS.add(btExitAS, 5, 0);
+      gpAS.add(btSaveAs, 5, 0);
       gpAS.add(btCancelAS, 5, 1);
-
 
       paneTi.getChildren().add(AI);
 
@@ -404,56 +390,89 @@ public class MainUi extends Application
       paneAS.setCenter(gridPaneAS);
       paneAS.setBottom(gpAS);
 
-
       // Create a scene and place it in the stage
       Scene scene2 = new Scene(paneAS, 700, 450);
       stageAS.setTitle("JukeBox Manager"); // Set title
       stageAS.setScene(scene2); // Place the scene in the stage
       stageAS.show(); // Display the stage
 
-
-      btExitAS.setOnAction(e -> {
+      btSaveAs.setOnAction(e -> {  // user must select save to add a song
          {
             String title = songAS.getText();
             String artist = artistAS.getText();
             Song song = new Song(title, artist);
             songList.add(song);
-            stageAS.close();
-            for (int i = 0; i < songList.getRecordList().size(); i++) {
-               System.out.println(songList.getRecordList().get(i).getSongTitle());
-            }
-            stage.show();
+            stageAS.close(); //after selecting save, add song screen will close
+            stage.show(); // main stage will show
 
          }
       });
-
    }
 
+   // Method used to look up a song
    private void searchSong ()
    {
-
       BorderPane paneSearch = new BorderPane();
+      BorderPane paneSearch2 = new BorderPane();
+      paneSearch.setPadding(new Insets(20));
+
+
+//      paneSearch2.setPadding(new Insets());
       Pane labelPane = new Pane();
       Label searchL = new Label("Search Song"); //Label to for search song window
       searchL.setFont(new Font("Sans Serif", 50));
+      TextField tfSearch = new TextField();
+      Button btSearch = new Button("Search");
+      HBox searchHB = new HBox(15);
+      searchHB.setPadding(new Insets(20, 5, 20, 5));
+      VBox searchVB = new VBox(8);
+      VBox searchVB2 = new VBox(10);
 
+      TextField tfSong = new TextField();
+      HBox tfSongHB = new HBox();
+      tfSongHB.getChildren().add(tfSong);
+      tfSongHB.setPadding(new Insets(7, 5, 20, 5));
+//      tfSongHB.setPrefWidth(800);
+      tfSongHB.setPrefSize(500, 500);
+      RadioButton rbArtist = new RadioButton("Artist");
+      RadioButton rbAlbum = new RadioButton("Album");
+      RadioButton rbTitle = new RadioButton("Title");
+      RadioButton rbGenre = new RadioButton("Genre");
+      Text txtSearch = new Text("Search by: ");
+      Font font = new Font("Sans Serif", 20);
+      txtSearch.setFont(font);
+
+      searchVB.getChildren().add(txtSearch);
+      searchVB.getChildren().add(rbArtist);
+      searchVB.getChildren().add(rbAlbum);
+      searchVB.getChildren().add(rbTitle);
+      searchVB.getChildren().add(rbGenre);
+      searchVB2.getChildren().add(searchHB);
+      searchVB2.getChildren().add(tfSongHB);
+
+
+
+      tfSearch.prefWidthProperty().bind(paneSearch.widthProperty().subtract(120));
+      tfSong.prefWidthProperty().bind(paneSearch.widthProperty().subtract(120));
+      tfSong.prefHeightProperty().bind(paneSearch.heightProperty().divide(2));
+
+      searchHB.getChildren().addAll(tfSearch, btSearch);
+      searchHB.setAlignment(Pos.CENTER);
       labelPane.getChildren().add(searchL);
+      paneSearch2.setRight(labelPane);
+      paneSearch2.setLeft(searchVB);
 
-      paneSearch.setCenter(labelPane);
-
-
-
-
+      paneSearch.setTop(paneSearch2);
+      paneSearch.setCenter(searchVB2);
+//      paneSearch.setBottom(tfSong);
 
       Stage searchStage = new Stage();
 
       Scene searchScene = new Scene(paneSearch, 700, 450);
-      searchScene.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
+//      searchScene.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
       searchStage.setScene(searchScene);
       searchStage.setTitle("JuxeBox - Search Song");
       searchStage.show();
-
-
    }
 
    public static void main (String[] args) //main method to run program
