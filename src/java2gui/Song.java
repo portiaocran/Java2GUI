@@ -19,11 +19,11 @@ public class Song
    private double songID;
    private Country country;
    private Boolean musicVideo;
-//
-//   public Song (String songTitle)
-//   {
-//      this.songTitle = songTitle;
-//   }
+
+   public Song (String songTitle)
+   {
+      this.songTitle = songTitle;
+   }
 
    public Song (String songTitle, String songArtist, Genre genre, double year)
    {
@@ -33,15 +33,12 @@ public class Song
       this.year = year;
    }
 
-   public Song (String songTitle, String songArtist, String songAlbum, Genre genre, double year)
+   public Song (String songTitle, String songArtist, String albumName)
    {
       this.songTitle = songTitle;
       this.songArtist = songArtist;
-      this.genre = genre;
-      this.year = year;
+      this.albumName = albumName;
    }
-
-
 
    public Song (String songTitle, String songArtist)
    {
@@ -58,8 +55,6 @@ public class Song
    {
       this.year = year;
    }
-
-
 
    public String getSongTitle ()
    {
@@ -84,8 +79,10 @@ public class Song
 
    public Genre getGenre ()
    {
+
       return genre;
    }
+
 
    public void setGenre (Genre genre)
    {
@@ -212,16 +209,5 @@ public class Song
    {
       this.musicVideo = musicVideo;
    }
-
-   public Song ()
-   {
-
-   }
-
-   public Song (String songTitle)
-   {
-      this.songTitle = songTitle;
-   }
-
 
 }

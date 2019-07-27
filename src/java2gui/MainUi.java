@@ -11,7 +11,9 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.SelectionMode;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -79,7 +81,12 @@ public class MainUi extends Application
       songList.add(new Song("Jesus Walks", "Kanye West"));  // added songs to list to test functionality, will remove
       songList.add(new Song("Heard Em Say", "Kanye West"));
 
-      songList.add(new Song("Song", "Vadym", "Weights", Genre.BLUES, 2009));
+      Song song = new Song("Nothing", "Portia");
+      song.setGenre(Genre.RNB);
+      song.setAlbumName("Greatness");
+      songList.add(song);
+
+      songList.add(new Song("Song", "Vadym", Genre.BLUES, 2009));
 
       ListView<String> lv = new ListView<>(FXCollections.observableArrayList()); //New Listivew which will track NameList that contains strings for song name and artist
       lv.setItems(songList.getNameList());
@@ -95,17 +102,18 @@ public class MainUi extends Application
                        tfGenre.setText("------");
                     }
                     else {
-                       tfGenre.setText("Genre:" + songList.getRecordList().get(i).getGenre().name());
+                       tfGenre.setText(songList.getRecordList().get(i).getGenre().name());
                     }
 
                     if ((songList.getRecordList().get(i).getAlbumName() == null)) {
                        tfAlbum.setText("------");
                     }
                     else {
-                       tfGenre.setText(songList.getRecordList().get(i).getGenre().name());
+                       tfAlbum.setText(songList.getRecordList().get(i).getAlbumName());
                     }
                     tfArtist.setText(songList.getRecordList().get(i).getSongArtist());
                     tfSong.setText(songList.getRecordList().get(i).getSongTitle());
+
                  }
                  lv.refresh();
               });
@@ -266,6 +274,8 @@ public class MainUi extends Application
 
       artistAI.setText(song.getSongArtist());
       songAI.setText(song.getSongTitle());
+      albumAI.setText(song.getAlbumName());
+
       String year = Double.toString(song.getYear());
       playsAI.setText(year);
 
@@ -290,8 +300,9 @@ public class MainUi extends Application
       btExitAI.setOnAction(p -> {
          stageAI.close();
          stage.show();
-      }
-      );
+      });
+
+      btSearchAI.setOnAction(a -> searchSong());
    }
 
 // Method to add song. If users selects add song button, they will enter another screen where they can then add a new song to the playlist
@@ -400,7 +411,9 @@ public class MainUi extends Application
          {
             String title = songAS.getText();
             String artist = artistAS.getText();
-            Song song = new Song(title, artist);
+            String album = albumAS.getText();
+            Song song = new Song(title, artist, album);
+            song.setGenre(Genre.valueOf(genreAS.getText()));
             songList.add(song);
             stageAS.close(); //after selecting save, add song screen will close
             stage.show(); // main stage will show
@@ -409,39 +422,57 @@ public class MainUi extends Application
       });
    }
 
+
    // Method used to look up a song
    private void searchSong ()
    {
-      BorderPane paneSearch = new BorderPane();
-      BorderPane paneSearch2 = new BorderPane();
-      paneSearch.setPadding(new Insets(20));
+      BorderPane paneSearch = new BorderPane();  //Main Pane to hold all Panes
+      paneSearch.setPadding(new Insets(20)); // Setting padding for main pane
+      BorderPane paneSearch2 = new BorderPane(); //Pane to hold Label and RadioButtons
 
+      Label searchL = new Label("Search Song"); //Label for search song window
+      Pane labelPane = new Pane(); //Pane to hold Label 
 
-//      paneSearch2.setPadding(new Insets());
-      Pane labelPane = new Pane();
-      Label searchL = new Label("Search Song"); //Label to for search song window
-      searchL.setFont(new Font("Sans Serif", 50));
-      TextField tfSearch = new TextField();
-      Button btSearch = new Button("Search");
-      HBox searchHB = new HBox(15);
-      searchHB.setPadding(new Insets(20, 5, 20, 5));
-      VBox searchVB = new VBox(8);
-      VBox searchVB2 = new VBox(10);
+      searchL.setFont(new Font("Sans Serif", 50)); // actual label
+      TextField tfSearch = new TextField();  //Search Bar
+      tfSearch.prefWidthProperty().bind(paneSearch.widthProperty().subtract(120));
 
-      TextField tfSong = new TextField();
-      HBox tfSongHB = new HBox();
-      tfSongHB.getChildren().add(tfSong);
-      tfSongHB.setPadding(new Insets(7, 5, 20, 5));
-//      tfSongHB.setPrefWidth(800);
-      tfSongHB.setPrefSize(500, 500);
+      Button btSearch = new Button("Search"); //Search Button
+      HBox searchHB = new HBox(15); //HBox to hold search button and search bar
+      searchHB.setPadding(new Insets(20, 5, 20, 5)); // padding for HBOX
+
+      VBox searchVB = new VBox(8);  //VBox created to place radio buttons vertically
+      VBox searchVB2 = new VBox(10);  //VBox created to place search bar and text area which will display song results
+
+      TextArea tfSong = new TextArea(); //text area to display results
+      tfSong.prefWidthProperty().bind(paneSearch.widthProperty().subtract(120));
+      tfSong.prefHeightProperty().bind(paneSearch.heightProperty().divide(2));
+      HBox tfSongHB = new HBox(); //HBOX to hold text area that will display results
+      tfSongHB.getChildren().add(tfSong); //added textarea to hbox
+      tfSongHB.setPadding(new Insets(7, 5, 20, 5)); //padding for hbox holding textarea
+
+      tfSongHB.setPrefSize(400, 400); //set sizing for HBOX/text area
+
+      //Radio buttons to search
       RadioButton rbArtist = new RadioButton("Artist");
       RadioButton rbAlbum = new RadioButton("Album");
       RadioButton rbTitle = new RadioButton("Title");
       RadioButton rbGenre = new RadioButton("Genre");
+
+      //Search by: text
       Text txtSearch = new Text("Search by: ");
       Font font = new Font("Sans Serif", 20);
       txtSearch.setFont(font);
 
+      //Created new toggle group and added radio buttons, so only one can be selected at a time
+      ToggleGroup searchTog = new ToggleGroup();
+
+      rbArtist.setToggleGroup(searchTog);
+      rbAlbum.setToggleGroup(searchTog);
+      rbTitle.setToggleGroup(searchTog);
+      rbGenre.setToggleGroup(searchTog);
+
+      //Adding "Searh by" text, and radio buttons to a vertical box, so all are placed in a straight line
       searchVB.getChildren().add(txtSearch);
       searchVB.getChildren().add(rbArtist);
       searchVB.getChildren().add(rbAlbum);
@@ -451,28 +482,73 @@ public class MainUi extends Application
       searchVB2.getChildren().add(tfSongHB);
 
 
-
-      tfSearch.prefWidthProperty().bind(paneSearch.widthProperty().subtract(120));
-      tfSong.prefWidthProperty().bind(paneSearch.widthProperty().subtract(120));
-      tfSong.prefHeightProperty().bind(paneSearch.heightProperty().divide(2));
-
+// Adding search bar, and button to hbox so they sit side by side
       searchHB.getChildren().addAll(tfSearch, btSearch);
       searchHB.setAlignment(Pos.CENTER);
+
+      //Adding label to pane
       labelPane.getChildren().add(searchL);
+      //adding pane w/ label to Pane with search bar and button
       paneSearch2.setRight(labelPane);
       paneSearch2.setLeft(searchVB);
 
+      //Adding panes to Main pane
       paneSearch.setTop(paneSearch2);
       paneSearch.setCenter(searchVB2);
-//      paneSearch.setBottom(tfSong);
 
+//Creating stage, setting scene to stage, naming and displaying stage
       Stage searchStage = new Stage();
-
       Scene searchScene = new Scene(paneSearch, 700, 450);
-//      searchScene.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
       searchStage.setScene(searchScene);
       searchStage.setTitle("JuxeBox - Search Song");
       searchStage.show();
+
+      //When user selects search button, the following method allows results to be displayed in text area
+      btSearch.setOnAction(g -> {
+         //If user searches by title
+         if (rbTitle.isSelected()) {
+            String songName = "";
+            for (int i = 0; i < songList.getRecordList().size(); i++) {
+               if (tfSearch.getText().equalsIgnoreCase(songList.getRecordList().get(i).getSongTitle())) {
+                  songName += songList.getRecordList().get(i).getSongTitle() + " - " + songList.getRecordList().get(i).getSongArtist() + "\n\n";
+               }
+            }
+            tfSong.setText(songName);
+         }
+         //if user searches by artist
+         else if (rbArtist.isSelected()) {
+            String songName = "";
+            for (int i = 0; i < songList.getRecordList().size(); i++) {
+               if (tfSearch.getText().equalsIgnoreCase(songList.getRecordList().get(i).getSongArtist())) {
+                  songName += songList.getRecordList().get(i).getSongTitle() + " - " + songList.getRecordList().get(i).getSongArtist() + "\n\n";
+               }
+            }
+            tfSong.setText(songName);
+         }
+         else if (rbAlbum.isSelected()) {
+            String songName = "";
+            for (int i = 0; i < songList.getRecordList().size(); i++) {
+               if (tfSearch.getText().equalsIgnoreCase(songList.getRecordList().get(i).getAlbumName())) {
+                  songName += songList.getRecordList().get(i).getSongTitle() + " - " + songList.getRecordList().get(i).getSongArtist() + "\n\n";
+               }
+            }
+            tfSong.setText(songName);
+         }
+         //   if user searches by genre
+         else if (rbGenre.isSelected()) {
+            String songName = "";
+            for (int i = 0; i < songList.getRecordList().size(); i++) {
+               if (songList.getRecordList().get(i).getGenre() == Genre.valueOf(tfSearch.getText())) {
+                  songName += songList.getRecordList().get(i).getSongTitle() + " - " + songList.getRecordList().get(i).getSongArtist() + "\n\n";
+               }
+//               else {
+//                  songName = "Sorry, no song matches this genre.";
+//               }
+            }
+            tfSong.setText(songName);
+         }
+
+      });
    }
 
    public static void main (String[] args) //main method to run program
