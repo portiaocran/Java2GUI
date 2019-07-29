@@ -1,5 +1,6 @@
 package java2gui;
 import java.util.ArrayList;
+import java.util.Collections;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 /**
@@ -37,6 +38,7 @@ public class SongList
 
    public ObservableList<String> getNameList ()
    {
+      Collections.sort(nameList);
       return nameList;
    }
 

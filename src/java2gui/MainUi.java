@@ -88,7 +88,8 @@ public class MainUi extends Application
 
       songList.add(new Song("Song", "Vadym", Genre.BLUES, 2009));
 
-      ListView<String> lv = new ListView<>(FXCollections.observableArrayList()); //New Listivew which will track NameList that contains strings for song name and artist
+      //New Listivew which will track NameList that contains strings for song name and artist
+      ListView<String> lv = new ListView<>(FXCollections.observableArrayList());
       lv.setItems(songList.getNameList());
       lv.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
       lv.prefHeightProperty().bind(pane.heightProperty().subtract(5)); //binding width and height of scrollbar to Scene
@@ -120,6 +121,7 @@ public class MainUi extends Application
 
       HBox buttons = new HBox(10); //pane for first row of buttons
       HBox buttons2 = new HBox(10); //second pane for second row of buttons
+
       //Add buttons to Hboxes
       buttons.getChildren().add(btAddInfo);
       buttons.getChildren().add(btAddNew);
@@ -164,8 +166,11 @@ public class MainUi extends Application
    //Additional Information method. When user selects additional info, a new window opens with more detailed information regarding song
    private void addInfo (Song song, Stage stage)
    {
-      // Get values from text fields
-      TextField artistAI = new TextField();   // text field values
+      BorderPane paneAI = new BorderPane(); // main pane holder to hold other panes
+      paneAI.setPadding(new Insets(15)); //padding for main pane
+
+      // text field values. Set to uneditable so user can't make changes
+      TextField artistAI = new TextField();
       artistAI.setEditable(false);
       TextField albumAI = new TextField();
       albumAI.setEditable(false);
@@ -175,7 +180,7 @@ public class MainUi extends Application
       genreAI.setEditable(false);
       TextField yearAI = new TextField();
       yearAI.setEditable(false);
-      TextField priceAI = new TextField();   // text field values
+      TextField priceAI = new TextField();
       priceAI.setEditable(false);
       TextField explicitAI = new TextField();
       explicitAI.setEditable(false);
@@ -185,8 +190,7 @@ public class MainUi extends Application
       playsAI.setEditable(false);
       TextField ratingAI = new TextField();
       ratingAI.setEditable(false);
-      TextField sizeAI = new TextField();   // text field values
-      sizeAI.setEditable(false);
+      TextField sizeAI = new TextField();
       TextField lengthAI = new TextField();
       lengthAI.setEditable(false);
       TextField idAI = new TextField();
@@ -195,17 +199,16 @@ public class MainUi extends Application
       countryAI.setEditable(false);
       TextField videoAI = new TextField();
       videoAI.setEditable(false);
-//      Button btAddSong = new Button("Add");
+
+
       Stage stageAI = new Stage(); //new stage that will appear after clicking additional info button
+
       GridPane gridPaneAI = new GridPane();
+      gridPaneAI.setVgap(4);
+
       Label AI = new Label("Additional Info"); //Title
       Font fontAI = new Font("Sans Serif", 50.0);
       AI.setFont(fontAI);
-
-      gridPaneAI.setVgap(4);
-
-      BorderPane paneAI = new BorderPane(); // main pane holder to hold other panes
-      paneAI.setPadding(new Insets(15)); //padding for add info screen
 
       artistAI.prefWidthProperty().bind(paneAI.widthProperty().subtract(150)); //binding text field width to screen width
 
@@ -275,9 +278,10 @@ public class MainUi extends Application
       artistAI.setText(song.getSongArtist());
       songAI.setText(song.getSongTitle());
       albumAI.setText(song.getAlbumName());
-
-      String year = Double.toString(song.getYear());
-      playsAI.setText(year);
+      yearAI.setText(Double.toString(song.getYear()));
+      priceAI.setText(Double.toString(song.getPrice()));
+//      explicitAI.setText(song.getExplicit().toString());
+//      playsAI.setText(year);
 
       if (song.getGenre() == null) {
          genreAI.setText("-----");
@@ -412,8 +416,15 @@ public class MainUi extends Application
             String title = songAS.getText();
             String artist = artistAS.getText();
             String album = albumAS.getText();
+            Double year = Double.parseDouble(yearAS.getText());
+            Double price = Double.parseDouble(priceAS.getText());
+
             Song song = new Song(title, artist, album);
             song.setGenre(Genre.valueOf(genreAS.getText()));
+            song.setYear(year);
+            song.setPrice(price);
+            song.setExplicit(true);
+
             songList.add(song);
             stageAS.close(); //after selecting save, add song screen will close
             stage.show(); // main stage will show
@@ -445,6 +456,7 @@ public class MainUi extends Application
       VBox searchVB2 = new VBox(10);  //VBox created to place search bar and text area which will display song results
 
       TextArea tfSong = new TextArea(); //text area to display results
+      tfSong.setEditable(false);
       tfSong.prefWidthProperty().bind(paneSearch.widthProperty().subtract(120));
       tfSong.prefHeightProperty().bind(paneSearch.heightProperty().divide(2));
       HBox tfSongHB = new HBox(); //HBOX to hold text area that will display results
