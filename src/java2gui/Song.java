@@ -209,5 +209,17 @@ public class Song
    {
       this.musicVideo = musicVideo;
    }
+   
+      @Override
+   public String toString ()
+   {
+      String song = "";
+
+         song += getSongTitle() + " - ";
+         song += getSongArtist();
+
+      return song;
+   }
+
 
 }

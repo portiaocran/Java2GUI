@@ -1,5 +1,4 @@
 package java2gui;
-import java.util.ArrayList;
 import java.util.Collections;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -8,14 +7,14 @@ import javafx.collections.ObservableList;
  */
 public class SongList
 {
-   private ArrayList<Song> recordList;
+   private ObservableList<Song> recordList;
    private ObservableList<String> nameList;
 
    public SongList ()
    {
 
       this.nameList = FXCollections.observableArrayList();
-      this.recordList = new ArrayList<Song>();
+      this.recordList = FXCollections.observableArrayList();
    }
 
    public void add (Song song)
@@ -26,12 +25,12 @@ public class SongList
 
    }
 
-   public ArrayList<Song> getRecordList ()
+   public ObservableList<Song> getRecordList ()
    {
       return recordList;
    }
 
-   public void setRecordList (ArrayList<Song> recordList)
+   public void setRecordList (ObservableList<Song> recordList)
    {
       this.recordList = recordList;
    }
@@ -47,5 +46,16 @@ public class SongList
       this.nameList = nameList;
    }
 
+   @Override
+   public String toString ()
+   {
+      String song = "";
+      for (Song a : recordList) {
+         song += a.getSongTitle() + " - ";
+         song += a.getSongArtist();
+
+      }
+      return song;
+   }
 
 }
