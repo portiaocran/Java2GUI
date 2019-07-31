@@ -1,5 +1,7 @@
 package java2gui;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
@@ -171,11 +173,12 @@ public class MainUi extends Application
                           lv.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
                           lv.prefHeightProperty().bind(pane.heightProperty().subtract(5)); //binding width and height of scrollbar to Scene
                           lv.prefWidthProperty().bind(pane.widthProperty().divide(3));
-
+                          
                           lv.getSelectionModel().selectedItemProperty().addListener( //controls main screen. if user selects song, information appears on screen
                             ov -> {         
                                        
                                        for (Integer i : lv.getSelectionModel().getSelectedIndices()) {
+                                            
                                               btAddInfo.setOnAction(e -> addInfo(songList.getRecordList().get(i), primaryStage));//Process Events for additional Information button
                                               btEdit.setOnAction(e -> addInfo(songList.getRecordList().get(i), primaryStage));//Process Events for edit button
                                               btAddNew.setOnAction(e -> addSong(primaryStage)); //Process Events for add button
@@ -389,14 +392,14 @@ public class MainUi extends Application
                           AI.setFont(fontAI);
                           gridPaneAS.setVgap(4);
                           paneAS.setPadding(new Insets(15)); //padding for add info screen
-                          tfArtist.prefWidthProperty().bind(paneAS.widthProperty().subtract(150)); //binding text field width to screen width
+                          artistAS.prefWidthProperty().bind(paneAS.widthProperty().subtract(150)); //binding text field width to screen width
                           gpAS.setHgap(30);
                           gpAS.setVgap(15);
                           gpAS.setAlignment(Pos.CENTER);
  
                           //adding buttons to gridpane
                           gridPaneAS.add(new Label("Artist : "), 0, 0);
-                          gridPaneAS.add(tfArtist, 1, 0);
+                          gridPaneAS.add(artistAS, 1, 0);
                           gridPaneAS.add(new Label("Album: "), 0, 1);
                           gridPaneAS.add(albumAS, 1, 1);
                           gridPaneAS.add(new Label("Song: "), 0, 2);
@@ -454,6 +457,12 @@ public class MainUi extends Application
                                    stage.show(); // main stage will show
                            }
                      });
+             
+              btCancelAS.setOnAction(p -> { //Processing event for exit button
+                                                                              stageAS.close();
+                                                                             stage.show();
+                                                                        });
+
               }
 
              // Method used to look up a song
@@ -528,30 +537,43 @@ public class MainUi extends Application
                           searchStage.setTitle("JuxeBox - Search Song");
                           searchStage.show();
 
-      //When user selects search button, the following method allows results to be displayed in text area
+                         //When user selects search button, the following method allows results to be displayed in text area
                          btSearch.setOnAction(g -> {
                          //If user searches by title
+                         String songName = "";
                                        if (rbTitle.isSelected()) {
-                                             String songName = "";
-                                                    for (int i = 0 ; i < songList.getRecordList().size() ; i++) {
-                                                             if (tfSearch.getText().equalsIgnoreCase(songList.getRecordList().get(i).getSongTitle())) {
-                                                                        songName += songList.getRecordList().get(i).getSongTitle() + " - " + songList.getRecordList().get(i).getSongArtist() + "\n\n";
-                                                                 }    
-                                                    }
-                                        tfSong.setText(songName);
-                           }
-                           //if user searches by artist
-                                        else if (rbArtist.isSelected()) {
-                                             String songName = "";
-                                                    for (int i = 0 ; i < songList.getRecordList().size() ; i++) {
-                                                             if (tfSearch.getText().equalsIgnoreCase(songList.getRecordList().get(i).getSongArtist())) {
-                                                                        songName += songList.getRecordList().get(i).getSongTitle() + " - " + songList.getRecordList().get(i).getSongArtist() + "\n\n";
-                                                                 }
+                                             Pattern pat= Pattern.compile(tfSearch.getText());
+                                             
+                                             for (int i = 0 ; i < songList.getRecordList().size() ; i++) {
+                                                  
+                                                  Matcher mat= pat.matcher(songList.getRecordList().get(i).getSongTitle());
+                                                 
+                                                  if (mat.matches()) 
+                                                         songName+=songList.getRecordList().get(i).toString();
+                                                          continue;
                                                     }
                           tfSong.setText(songName);
-                          }
-                                                    else if (rbAlbum.isSelected()) {
-                                                         String songName = "";
+                          
+                                        }
+                                       
+                                       
+                           //if user searches by artist
+                                        else if(rbArtist.isSelected()) {
+                                             Pattern pat= Pattern.compile(tfSearch.getText());
+                                             
+                                             for (int i = 0 ; i < songList.getRecordList().size() ; i++) {
+                                                  
+                                                  Matcher mat= pat.matcher(songList.getRecordList().get(i).getSongArtist());
+                                                 
+                                                  if (mat.matches()) 
+                                                         songName+=songList.getRecordList().get(i).toString() + "\n\n";
+                                                          continue;
+                                                    }
+                          tfSong.setText(songName);
+                          
+                                        }
+                                                    if (rbAlbum.isSelected()) {
+                                                       
                                                                 for (int i = 0 ; i < songList.getRecordList().size() ; i++) {
                                                                             if (tfSearch.getText().equalsIgnoreCase(songList.getRecordList().get(i).getAlbumName())) {
                                                                                 songName += songList.getRecordList().get(i).getSongTitle() + " - " + songList.getRecordList().get(i).getSongArtist() + "\n\n";
@@ -559,13 +581,13 @@ public class MainUi extends Application
                                                                  }
                                                       tfSong.setText(songName);
                                                     }
-         //   if user searches by genre
+            //   if user searches by genre
                                                                  else if (rbGenre.isSelected()) {
-                                                                      String songName = "";
+                                                                
                                                                            for (int i = 0 ; i < songList.getRecordList().size() ; i++) {
-                                                                                     if (songList.getRecordList().get(i).getGenre() == Genre.valueOf(tfSearch.getText())) {
+                                                                                     if (songList.getRecordList().get(i).getGenre() == Genre.valueOf(tfSearch.getText())) 
                                                                                           songName += songList.getRecordList().get(i).getSongTitle() + " - " + songList.getRecordList().get(i).getSongArtist() + "\n\n";
-                                                                                      }
+                                                                                          continue;
                                                                               }
                                                           tfSong.setText(songName);
                                                     }
