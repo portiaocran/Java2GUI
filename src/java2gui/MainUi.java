@@ -30,42 +30,69 @@ import javafx.stage.Stage;
 public class MainUi extends Application
 {
 
-//Instance variables for arraylist and GUI, to be accessed from anywere within class
-        SongList songList = new SongList(); // Main ArrayList to track songs
-        ListView<Song> lv = new ListView<>(FXCollections.observableArrayList()); //observable list to update any changes
-        Button btAddInfo = new Button("Additional Info");
-        Button btAddNew = new Button("Add New");
-        Button btSearch = new Button("Search");
-        Button btEdit = new Button("Edit");
-        Button btAddNewAI = new Button("Add New");
-        Button btSearchAI = new Button("Search");
-        Button btEditAI = new Button("Edit");   
-        Button btNextAI = new Button("Next"); 
-        Button btDeleteAI = new Button("Delete");   
-        Button btPrevAI = new Button("Prev");
-        Button btExitAI = new Button("Exit");
-        Button btSaveAI = new Button("Save");
-        
-        TextField artistAI = new TextField();
-        TextField albumAI = new TextField();
-        TextField songAI = new TextField();
-        TextField genreAI = new TextField();
-        TextField yearAI = new TextField();
-        TextField priceAI = new TextField();
-        TextField explicitAI = new TextField();
-        TextField catNumAI = new TextField();
-        TextField playsAI = new TextField();
-        TextField ratingAI = new TextField();
-        TextField sizeAI = new TextField();
-        TextField lengthAI = new TextField();
-        TextField idAI = new TextField();
-        TextField countryAI = new TextField();
-        TextField videoAI = new TextField();
-        TextField tfArtist = new TextField();
-        TextField tfAlbum = new TextField();
-        TextField tfSong = new TextField();
-        TextField tfGenre = new TextField();
-        Song song2;
+     //Instance variables for arraylist and GUI, to be accessed from anywere within class
+             SongList songList = new SongList(); // Main ArrayList to track songs
+             ListView<Song> lv = new ListView<>(FXCollections.observableArrayList()); //observable list to update any changes
+
+               //Buttons for Additional Info Window
+             Button btAddInfo = new Button("Additional Info");
+             Button btAddNew = new Button("Add New");
+             Button btSearch = new Button("Search");
+             Button btAddNewAI = new Button("Add New");
+             Button btSearchAI = new Button("Search");
+             Button btEditAI = new Button("Edit");   
+             Button btNextAI = new Button("Next"); 
+             Button btDeleteAI = new Button("Delete");   
+             Button btPrevAI = new Button("Prev");
+             Button btExitAI = new Button("Exit");
+             Button btSaveAI = new Button("Save");
+              //Buttons for Add Song window
+             Button btAddNewAS = new Button("Add New");
+             Button btSearchAS = new Button("Search");
+             Button btEditAS = new Button("Edit");
+             Button btNextAS = new Button("Next");
+             Button btDeleteAS = new Button("Delete");
+             Button btPrevAS = new Button("Prev");
+             Button btSaveAs = new Button("Save");
+             Button btCancelAS = new Button("Cancel");
+             //Textfields for Additional Info
+             TextField artistAI = new TextField();
+             TextField albumAI = new TextField();
+             TextField songAI = new TextField();
+             TextField genreAI = new TextField();
+             TextField yearAI = new TextField();
+             TextField priceAI = new TextField();
+             TextField explicitAI = new TextField();
+             TextField catNumAI = new TextField();
+             TextField playsAI = new TextField();
+             TextField ratingAI = new TextField();
+             TextField sizeAI = new TextField();
+             TextField lengthAI = new TextField();
+             TextField idAI = new TextField();
+             TextField countryAI = new TextField();
+             TextField videoAI = new TextField();
+             TextField tfArtist = new TextField();
+             TextField tfAlbum = new TextField();
+             TextField tfSong = new TextField();
+             TextField tfGenre = new TextField();
+             Song song2;
+             //Textfields for Add Song window
+             TextField artistAS = new TextField("Required");   // text field values
+             TextField albumAS = new TextField();
+             TextField songAS = new TextField("Required");
+             TextField genreAS = new TextField("Required");
+             TextField yearAS = new TextField();
+             TextField priceAS = new TextField();
+             TextField explicitAS = new TextField();
+             TextField catNumAS = new TextField();
+             TextField playsAS = new TextField();
+             TextField ratingAS = new TextField();
+             TextField sizeAS = new TextField();
+             TextField lengthAS = new TextField();
+             TextField idAS = new TextField();
+             TextField countryAS = new TextField();
+             TextField videoAS = new TextField();
+                          
    
        @Override
            public void start (Stage primaryStage)
@@ -89,7 +116,7 @@ public class MainUi extends Application
                           btAddInfo.setFont(new Font("Sans Serif", 15));
                           btAddNew.setFont(new Font("Sans Serif", 15));
                           btSearch.setFont(new Font("Sans Serif", 15));
-                          btEdit.setFont(new Font("Sans Serif", 15));
+//                          btEdit.setFont(new Font("Sans Serif", 15));
                           btAddNewAI.setFont(new Font("Sans Serif", 12));
                           btSearchAI.setFont(new Font("Sans Serif", 12));
                           btEditAI.setFont(new Font("Sans Serif", 12));
@@ -139,7 +166,7 @@ public class MainUi extends Application
                           buttons.getChildren().add(btAddInfo);
                           buttons.getChildren().add(btAddNew);
                           buttons2.getChildren().add(btSearch);
-                          buttons2.getChildren().add(btEdit);
+//                          buttons2.getChildren().add(btEdit);
                           buttons.setAlignment(Pos.BASELINE_CENTER);
                           buttons.setPrefWidth(100);
                           buttons2.setAlignment(Pos.BASELINE_CENTER);
@@ -171,6 +198,7 @@ public class MainUi extends Application
                           //Created listener for listview(scrollbar)
                           lv.setItems(songList.getRecordList());
                           lv.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+                          
                           lv.prefHeightProperty().bind(pane.heightProperty().subtract(5)); //binding width and height of scrollbar to Scene
                           lv.prefWidthProperty().bind(pane.widthProperty().divide(3));
                           
@@ -180,7 +208,7 @@ public class MainUi extends Application
                                        for (Integer i : lv.getSelectionModel().getSelectedIndices()) {
                                             
                                               btAddInfo.setOnAction(e -> addInfo(songList.getRecordList().get(i), primaryStage));//Process Events for additional Information button
-                                              btEdit.setOnAction(e -> addInfo(songList.getRecordList().get(i), primaryStage));//Process Events for edit button
+                                             
                                               btAddNew.setOnAction(e -> addSong(primaryStage)); //Process Events for add button
                                               btSearch.setOnAction(l -> searchSong());//Process Events for search button
                                              
@@ -215,6 +243,18 @@ public class MainUi extends Application
                           GridPane gpAI = new GridPane();
                           Label AI = new Label("Additional Info"); //Title
                           Font fontAI = new Font("Sans Serif", 50.0);
+                          
+                          //Event Processiong for different buttons
+                          btAddNewAI.setOnAction(e -> addSong(stage));//Event Processing for new button
+                          btExitAI.setOnAction(p -> { //Processing event for exit button
+                                                                              stageAI.close();
+                                                                             stage.show();
+                                                                        });
+                          btEditAI.setOnAction(e -> editSong(song)); 
+                          btSearchAI.setOnAction(a -> searchSong()); //Event processing for search
+                          btDeleteAI.setOnAction(s -> songList.getRecordList().remove(song));
+                          
+
       
                           paneAI.setPadding(new Insets(15)); //padding for main pane
                           gridPaneAI.setVgap(4);
@@ -278,42 +318,24 @@ public class MainUi extends Application
                           stageAI.setScene(scene2); // Place the scene in the stage
                           stageAI.show(); // Display the stage
 
-                          btAddNewAI.setOnAction(e -> addSong(stage));//Event Processing for new button
-                          btExitAI.setOnAction(p -> { //Processing event for exit button
-                                                                              stageAI.close();
-                                                                             stage.show();
-                                                                        });
-
-                          btSearchAI.setOnAction(a -> searchSong()); //Event processing for search
-                          btEditAI.setOnAction(z -> {//Event processing for edit button
-                               songAI.setEditable(true);
-
-                          btSaveAI.setOnAction(q -> {                             
-                                song.setSongTitle(songAI.getText());
-                                lv.refresh();
-                               });
-               });
-
                          this.song2=song;
-        
+    
                           if (songList.getRecordList().indexOf(song) == songList.getRecordList().size()-1) {
-                                btNextAI.disableProperty();
-                          } 
-                              else {
-                                         btNextAI.setOnAction(e ->{ 
-                                          nextSong(this.song2); 
-                    });
-            }
+                                        btNextAI.disableProperty();
+                                        } 
+                                   else {
+                                                  btNextAI.setOnAction(e ->{ 
+                                                  nextSong(this.song2); 
+                                        });
+                           }   
                           if (songList.getRecordList().indexOf(song) == 0) {
                                  btPrevAI.disableProperty();
-                             } 
-                              else {
-
+                                        } 
+                                   else {
                           btPrevAI.setOnAction(e ->{ 
                                  prevSong(this.song2);
-                                 });
-            }
-           
+                                    });
+                              }
    }
              //Method to go to next song
              private void nextSong(Song song2) {
@@ -340,12 +362,15 @@ public class MainUi extends Application
                                         }
                             btNextAI.setOnAction(e ->{ 
                                  nextSong(this.song2);
-                                 });
+                                 });             
               }
+               
+               
                
 // Method to add song. If users selects add song button, they will enter another screen where they can then add a new song to the playlist
              private void addSong (Stage stage)
              {
+                  
                           Stage stageAS = new Stage(); //new stage that will appear after clicking add song info button
                           GridPane gridPaneAS = new GridPane();
                           StackPane paneTi = new StackPane(); //stackpane created to hold title
@@ -353,40 +378,6 @@ public class MainUi extends Application
                           Font fontAI = new Font("Sans Serif", 50.0);
                           GridPane gpAS = new GridPane();
                           BorderPane paneAS = new BorderPane(); // main pane holder to hold other panes
-                          
-                          //creating textfields and buttons
-                          TextField artistAS = new TextField("Required");   // text field values
-                          TextField albumAS = new TextField();
-                          TextField songAS = new TextField("Required");
-                          TextField genreAS = new TextField("Required");
-                          TextField yearAS = new TextField();
-                          TextField priceAS = new TextField();
-                          TextField explicitAS = new TextField();
-                          TextField catNumAS = new TextField();
-                          TextField playsAS = new TextField();
-                          TextField ratingAS = new TextField();
-                          TextField sizeAS = new TextField();
-                          TextField lengthAS = new TextField();
-                          TextField idAS = new TextField();
-                          TextField countryAS = new TextField();
-                          TextField videoAS = new TextField();
-                          
-                          Button btAddNewAS = new Button("Add New");
-                          btAddNewAS.setFont(new Font("Sans Serif", 12));
-                          Button btSearchAS = new Button("Search");
-                          btSearchAS.setFont(new Font("Sans Serif", 12));
-                          Button btEditAS = new Button("Edit");
-                          btEditAS.setFont(new Font("Sans Serif", 12));
-                          Button btNextAS = new Button("Next");
-                          btNextAS.setFont(new Font("Sans Serif", 12));
-                          Button btDeleteAS = new Button("Delete");
-                          btDeleteAS.setFont(new Font("Sans Serif", 12));
-                          Button btPrevAS = new Button("Prev");
-                          btPrevAS.setFont(new Font("Sans Serif", 12));
-                          Button btSaveAs = new Button("Save");
-                          btSaveAs.setFont(new Font("Sans Serif", 12));
-                          Button btCancelAS = new Button("Cancel");
-                          btCancelAS.setFont(new Font("Sans Serif", 12));
                           
                           //Formatting for panes and nodes
                           AI.setFont(fontAI);
@@ -396,6 +387,14 @@ public class MainUi extends Application
                           gpAS.setHgap(30);
                           gpAS.setVgap(15);
                           gpAS.setAlignment(Pos.CENTER);
+                          btAddNewAS.setFont(new Font("Sans Serif", 12));
+                          btSearchAS.setFont(new Font("Sans Serif", 12));
+                          btEditAS.setFont(new Font("Sans Serif", 12));
+                          btNextAS.setFont(new Font("Sans Serif", 12));
+                          btDeleteAS.setFont(new Font("Sans Serif", 12));
+                          btPrevAS.setFont(new Font("Sans Serif", 12));
+                          btSaveAs.setFont(new Font("Sans Serif", 12));
+                          btCancelAS.setFont(new Font("Sans Serif", 12));
  
                           //adding buttons to gridpane
                           gridPaneAS.add(new Label("Artist : "), 0, 0);
@@ -438,8 +437,8 @@ public class MainUi extends Application
                           stageAS.setScene(scene2); // Place the scene in the stage
                           stageAS.show(); // Display the stage
 
-             btSaveAs.setOnAction(e -> {  // Event processing for saving song, user must select save to add a song
-                         {
+                          btSaveAs.setOnAction(e -> {  // Event processing for saving song, user must select save to add a song
+                               {
                                    String title = songAS.getText();
                                    String artist = artistAS.getText();
                                    String album = albumAS.getText();
@@ -455,15 +454,21 @@ public class MainUi extends Application
                                    songList.add(song);
                                    stageAS.close(); //after selecting save, add song screen will close
                                    stage.show(); // main stage will show
-                           }
-                     });
-             
-              btCancelAS.setOnAction(p -> { //Processing event for exit button
-                                                                              stageAS.close();
-                                                                             stage.show();
-                                                                        });
+                              }
+                           });
 
               }
+             
+             private void editSong(Song song) 
+                 {
+                          songAI.setEditable(true);
+                          btEditAI.setOnAction(e -> editSong(song)); 
+                          btSaveAI.setOnAction(e ->  
+                          {
+                                   song.setSongTitle(songAI.getText());
+                                   lv.refresh();
+                          });
+             }
 
              // Method used to look up a song
              private void searchSong ()
