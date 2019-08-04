@@ -1,28 +1,25 @@
 package java2gui;
-import java.util.Collections;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 /**
  * @author Portia Ocran
  */
-public class SongList
+public class SongList implements java.io.Serializable
 {
-   private ObservableList<Song> recordList;
-   private ObservableList<String> nameList;
-
+     
+   private static ObservableList<Song> recordList;
+  
    public SongList ()
    {
 
-      this.nameList = FXCollections.observableArrayList();
+      
       this.recordList = FXCollections.observableArrayList();
    }
 
-   public void add (Song song)
-   {
-
-      this.nameList.add(song.getSongTitle() + " - " + song.getSongArtist());
+   public void add (Song song) {
+        
       this.recordList.add(song);
-
+      
    }
 
    public ObservableList<Song> getRecordList ()
@@ -35,22 +32,11 @@ public class SongList
       this.recordList = recordList;
    }
 
-   public ObservableList<String> getNameList ()
-   {
-      Collections.sort(nameList);
-      return nameList;
-   }
-
-   public void setNameList (ObservableList<String> nameList)
-   {
-      this.nameList = nameList;
-   }
-
    @Override
    public String toString ()
    {
       String song = "";
-      for (Song a : recordList) {
+      for (Song a : this.recordList) {
          song += a.getSongTitle() + " - ";
          song += a.getSongArtist();
 

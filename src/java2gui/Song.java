@@ -1,60 +1,63 @@
 package java2gui;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 /**
  * @author Portia Ocran
  */
-public class Song
+public class Song implements java.io.Serializable
 {
-   private String songTitle;
-   private String songArtist;
-   private Genre genre;
-   private double year;
-   private double price;
-   private Boolean explicit;
-   private Double catalogNumber;
-   private int plays;
-   private String albumName;
-   private int rating;
-   private int size;
-   private String songLength;
-   private double songID;
-   private Country country;
-   private Boolean musicVideo;
+   private transient String songTitle;
+   private transient String songArtist;
+   private transient String albumName;
+   private transient Genre genre;
+   private transient int year;
+   private transient double price;
+   private transient Explicit explicit;
+   private transient int catalogNumber;
+   private static int nextCatNum=1;
+   private transient int plays;
+   private transient int rating;
+   private transient String size;
+   private transient String songLength;
+   private transient String songID;
+   private transient Country country;
+   private transient MusicVideo musicVideo;
 
-   public Song (String songTitle)
-   {
-      this.songTitle = songTitle;
-   }
+     public
+     Song (String songTitle, String songArtist, Genre genre, int year, double price, Explicit explicit, String albumName, int rating, String size, String songLength, Country country, MusicVideo musicVideo)
+     {
+          this.songTitle = songTitle;
+          this.songArtist = songArtist;
+          this.genre = genre;
+          this.year = year;
+          this.price = price;
+          this.explicit = explicit;
+          this.catalogNumber= Song.nextCatNum;
+          Song.nextCatNum++;
+          this.plays = 0;
+          this.albumName = albumName;
+          this.rating = rating;
+          this.size = size;
+          this.songLength = songLength;
+          this.songID = this.songTitle.charAt(0) +"" + this.songArtist.charAt(0);
+          this.country = country;
+          this.musicVideo = musicVideo;
+     }
 
-   public Song (String songTitle, String songArtist, Genre genre, double year)
-   {
-      this.songTitle = songTitle;
-      this.songArtist = songArtist;
-      this.genre = genre;
-      this.year = year;
-   }
+     public
+     Song (String songTitle, String songArtist)
+     {
+          this.songTitle = songTitle;
+          this.songArtist = songArtist;
+     }
 
-   public Song (String songTitle, String songArtist, String albumName)
-   {
-      this.songTitle = songTitle;
-      this.songArtist = songArtist;
-      this.albumName = albumName;
-   }
-
-   public Song (String songTitle, String songArtist)
-   {
-      this.songTitle = songTitle;
-      this.songArtist = songArtist;
-   }
-
-   public Song (Genre genre)
-   {
-      this.genre = genre;
-   }
-
-   public Song (double year)
-   {
-      this.year = year;
-   }
+     public
+     Song ()
+     {
+     }
+     
+     
 
    public String getSongTitle ()
    {
@@ -89,13 +92,13 @@ public class Song
       this.genre = genre;
    }
 
-   public double getYear ()
+   public int getYear ()
    {
 
       return year;
    }
 
-   public void setYear (double year)
+   public void setYear (int year)
    {
       this.year = year;
    }
@@ -110,22 +113,23 @@ public class Song
       this.price = price;
    }
 
-   public Boolean getExplicit ()
+   public Explicit getExplicit ()
    {
       return explicit;
    }
 
-   public void setExplicit (Boolean explicit)
+   public void setExplicit (Explicit explicit)
    {
       this.explicit = explicit;
    }
 
-   public Double getCatalogNumber ()
+   public int getCatalogNumber ()
    {
+    
       return catalogNumber;
    }
 
-   public void setCatalogNumber (Double catalogNumber)
+   public void setCatalogNumber (int catalogNumber)
    {
       this.catalogNumber = catalogNumber;
    }
@@ -142,6 +146,9 @@ public class Song
 
    public String getAlbumName ()
    {
+        if (albumName == null) {
+             return "----";
+        }
       return albumName;
    }
 
@@ -160,12 +167,12 @@ public class Song
       this.rating = rating;
    }
 
-   public int getSize ()
+   public String getSize ()
    {
       return size;
    }
 
-   public void setSize (int size)
+   public void setSize (String size)
    {
       this.size = size;
    }
@@ -180,14 +187,9 @@ public class Song
       this.songLength = songLength;
    }
 
-   public double getSongID ()
+   public String getSongID ()
    {
       return songID;
-   }
-
-   public void setSongID (double songID)
-   {
-      this.songID = songID;
    }
 
    public Country getCountry ()
@@ -200,12 +202,12 @@ public class Song
       this.country = country;
    }
 
-   public Boolean getMusicVideo ()
+   public MusicVideo getMusicVideo ()
    {
       return musicVideo;
    }
 
-   public void setMusicVideo (Boolean musicVideo)
+   public void setMusicVideo (MusicVideo musicVideo)
    {
       this.musicVideo = musicVideo;
    }
@@ -214,12 +216,22 @@ public class Song
    public String toString ()
    {
       String song = "";
-
+         song+= getCatalogNumber() + ". ";
          song += getSongTitle() + " - ";
          song += getSongArtist();
 
       return song;
    }
 
+ private void writeObject(ObjectOutputStream out) throws IOException {
+        out.writeObject(getSongTitle());
+        out.writeObject(getSongArtist());
+    }
 
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        this.songTitle =((String) in.readObject());
+        this.songArtist =((String) in.readObject());
+    }
 }
+
+
