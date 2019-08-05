@@ -7,12 +7,10 @@ import javafx.collections.ObservableList;
 public class SongList implements java.io.Serializable
 {
      
-   private static ObservableList<Song> recordList;
+   private ObservableList<Song> recordList;
   
    public SongList ()
    {
-
-      
       this.recordList = FXCollections.observableArrayList();
    }
 

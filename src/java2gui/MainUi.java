@@ -848,7 +848,7 @@ public class MainUi extends Application
                           cbCountry.prefWidthProperty().bind(paneEI.widthProperty().subtract(100));
                           cbRating.prefWidthProperty().bind(paneEI.widthProperty().subtract(100));
 
-                          btSaveAs.setFont(new Font("Sans Serif", 15));
+                          saveEI.setFont(new Font("Sans Serif", 15));
                           btCancelAS.setFont(new Font("Sans Serif", 15));
                           
                           
@@ -898,7 +898,7 @@ public class MainUi extends Application
                           gpEi2.add(cbMV,9,0);
                           cbMV.getSelectionModel().select(song.getMusicVideo());
                           cbMV.setItems( FXCollections.observableArrayList( MusicVideo.values()));
-                          gpEI.getChildren().addAll(btCancelAS, btSaveAs);
+                          gpEI.getChildren().addAll(btCancelAS, saveEI);
                           gpEI.prefWidthProperty().bind(paneEI.widthProperty().subtract(2));
                           vbAllEI.getChildren().addAll(vbEI, vbEI2);
                           gpEi3.setTop(gpEdit);

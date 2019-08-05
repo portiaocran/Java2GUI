@@ -1,7 +1,4 @@
 package java2gui;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 /**
  * @author Portia Ocran
  */
@@ -24,8 +21,7 @@ public class Song implements java.io.Serializable
    private transient Country country;
    private transient MusicVideo musicVideo;
 
-     public
-     Song (String songTitle, String songArtist, Genre genre, int year, double price, Explicit explicit, String albumName, int rating, String size, String songLength, Country country, MusicVideo musicVideo)
+     public Song (String songTitle, String songArtist, Genre genre, int year, double price, Explicit explicit, String albumName, int rating, String size, String songLength, Country country, MusicVideo musicVideo)
      {
           this.songTitle = songTitle;
           this.songArtist = songArtist;
@@ -52,12 +48,6 @@ public class Song implements java.io.Serializable
           this.songArtist = songArtist;
      }
 
-     public
-     Song ()
-     {
-     }
-     
-     
 
    public String getSongTitle ()
    {
@@ -223,15 +213,6 @@ public class Song implements java.io.Serializable
       return song;
    }
 
- private void writeObject(ObjectOutputStream out) throws IOException {
-        out.writeObject(getSongTitle());
-        out.writeObject(getSongArtist());
-    }
-
-    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
-        this.songTitle =((String) in.readObject());
-        this.songArtist =((String) in.readObject());
-    }
 }
 
 
