@@ -235,6 +235,7 @@ public class MainUi extends Application
                           btExitAI.setFont(new Font("Sans Serif", 12));
                           btSaveAI.setFont(new Font("Sans Serif", 12)); 
                           tfArtist.setEditable(false);
+                          tfSong.setText("SELECT A SONG FROM THE LIST TO VIEW MORE INFORMATION");
                           tfArtist.prefWidthProperty().bind(gridPane.widthProperty().divide(1.5)); //Bind textfield to 
                           tfAlbum.setEditable(false);
                           tfSong.setEditable(false);
@@ -678,7 +679,10 @@ public class MainUi extends Application
                           stageAS.setScene(scene2); // Place the scene in the stage
                           stageAS.show(); // Display the stage
                           
-                          btCancelAS.setOnAction(e -> stageAS.close());
+                          btCancelAS.setOnAction(e -> {
+                               stageAS.close();
+                                   stage.show();
+                                  });
                           btSaveAs.setOnAction(e -> {  // Event processing for saving song, user must select save to add a song
                                
                                try{
@@ -765,16 +769,28 @@ public class MainUi extends Application
                                                     ButtonType no = new ButtonType("no");
                                                     alert12.getButtonTypes().clear();
                                                     alert12.getButtonTypes().addAll(yes, no);
-                                                    alert12.showAndWait().ifPresent(response -> {
-    if (response == yes) {
-         addSong(stage);
-    }
-    
-    else if(response == no){
-                                                    
+                                                       alert12.showAndWait().ifPresent(response -> {
+                                                       if (response == yes) {
+                                                           songAS.clear();
+                                                           artistAS.clear();
+                                                           albumAS.clear();
+                                                           songTime.clear();
+                                                           songSize.clear();
+                                                           cbPrice.getSelectionModel().clearSelection();
+                                                           cbCountry.getSelectionModel().clearSelection();
+                                                           cbGenre.getSelectionModel().clearSelection();
+                                                           cbExplicit.getSelectionModel().clearSelection();
+                                                           cbYear.getSelectionModel().clearSelection();
+                                                           cbMV.getSelectionModel().clearSelection();
+                                                           cbRating.getSelectionModel().clearSelection();
+
+                                                       }
+
+                                                       else if(response == no){
+
                                                     
                                    stageAS.close(); //after selecting save, add song screen will close
-                                   stage.show(); // main stage will show
+//                                   stage.show(); // main stage will show
                                          }
                             });
                                         }
