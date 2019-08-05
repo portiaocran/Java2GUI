@@ -14,7 +14,10 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -135,118 +138,71 @@ public class MainUi extends Application
                  
                  //ADDING SONGS
 
+               Song s1 = new Song("Baby Be Mine", "Michael Jackson", Genre.POP, 1982, 2.50, Explicit.NO, "Thriller", 3, "5 MB", "3:21", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s1);
+               Song s2 = new Song("The Girl is Mine", "Michael Jackson", Genre.POP, 1982, 2.00, Explicit.NO, "Thriller", 3, "5 MB", "1:30", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s2);
+               Song s3 = new Song("Beat It", "Michael Jackson", Genre.ROCK, 1982, 3.50, Explicit.YES, "Thriller", 3, "2 MB", "3:45", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s3);
+               Song s4 = new Song("Champion", "Kanye West", Genre.RAP, 2007, 1.75, Explicit.YES, "Graduation", 3, "2 MB", "3:15", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s4);
+               Song s5 = new Song("Good Morning", "Kanye West", Genre.RAP, 2007,1.00, Explicit.YES, "Graduation", 2, "2 MB", "2:28", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s5);            
+               Song s6 = new Song("Stronger", "Kanye West", Genre.RAP, 2007,4.00, Explicit.YES, "Graduation", 4, "2 MB", "5:11", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s6);
+               Song s7 = new Song("Portland", "Drake, Quavo, Travis Scott", Genre.RAP, 2017,1.00, Explicit.YES, "More Life", 5, "3 MB", "3:55", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s7);
+               Song s8 = new Song("Fake Love", "Drake", Genre.RAP, 2017,3.25, Explicit.YES, "More Life", 5, "1 MB", "1:47", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s8);
+               Song s9 = new Song("Stir Fry", "Migos", Genre.RAP, 2018, 2.25, Explicit.YES, "Culture II", 2, "2.5 MB", "3:10", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s9);
+               Song s10 = new Song("Bodak Yellow", "Cardi B", Genre.RAP, 2017,3.50, Explicit.YES, "Bodak Yellow", 2, "3 MB", "3:43", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s10);
+               Song s11 = new Song("Fake Love", "Drake", Genre.RAP, 2017,3.25, Explicit.YES, "More Life", 5, "1 MB", "1:47", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s11);
+               Song s12 = new Song("Ransom", "Lil' Tecca", Genre.RAP, 2019, 1.25, Explicit.NO, "Ransom", 2, "3.7 MB", "2:11", Country.UNITED_STATES, MusicVideo.NO);
+               songList.add(s12);
+               Song s13 = new Song("Rocket Man", "Elton John", Genre.POP, 1972,4.50, Explicit.NO, "Honky Chateau", 5, "3 MB", "4:42", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s13);
+               Song s14 = new Song("Tiny Dancer", "Elton John", Genre.POP, 1972,4.50, Explicit.NO, "Honky Chateau", 4, "2 MB", "6:17", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s14);
+               Song s15 = new Song("Your Song", "Elton John", Genre.ROCK, 1970, 3.25, Explicit.NO, "Elton John", 3, "2.9 MB", "3:59", Country.UNITED_STATES, MusicVideo.NO);
+               songList.add(s15);
+               Song s16 = new Song("Speed It Up", "Gunna", Genre.RAP, 2019,4.00, Explicit.YES, "Drip or Drown 2", 5, "3 MB", "4:42", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s16);
+               Song s17 = new Song("EARFQUAKE", "Tyler, The Creator", Genre.RAP, 2019,2.50, Explicit.YES, "IGOR", 4, "1.9 MB", "3:10", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s17);
+               Song s18 = new Song("U Say", "GoldLink & Tyler The Creator", Genre.RNB, 1970, 3.25, Explicit.NO, "Diaspora", 3, "3.2 MB", "3:21", Country.UNITED_STATES, MusicVideo.NO);
+               songList.add(s18);
+               Song s19 = new Song("Floor Seats", "A$AP Ferg", Genre.RAP, 2019,1.00, Explicit.YES, "Floor Seats", 2, "1 MB", "2:37", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s19);
+               Song s20= new Song("Don't Waste My Time", "Krept & Konan", Genre.RAP, 2014,2.00, Explicit.YES, "Don't Waste My Time", 4, "1.9 MB", "3:10", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s20);
+               Song s21 = new Song("Like a Prayer", "Madonna", Genre.POP, 1989, 5.00, Explicit.NO, "Like a Prayer", 5, "4.7 MB", "5:42", Country.UNITED_STATES, MusicVideo.NO);
+               songList.add(s21);
+               Song s22 = new Song("Floor Seats", "A$AP Ferg", Genre.RAP, 2019,1.00, Explicit.YES, "Floor Seats", 2, "1 MB", "2:37", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s22);
+               Song s23= new Song("YMCA", "Village People", Genre.FUNK, 2002,2.00, Explicit.YES, "YMCA", 4, "2.1 MB", "4.44", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s23);
+               Song s24 = new Song("Act Up", "City Girls", Genre.HIPHOP, 2019, 5.00, Explicit.NO, "Girl Code", 2, "2.7 MB", "2:39", Country.UNITED_STATES, MusicVideo.NO);
+               songList.add(s24);
+               Song s25 = new Song("Do For Love", "2PAC", Genre.RAP, 1997,1.00, Explicit.YES, "R U Still Down?",4, "3 MB", "3:00", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s25);
+               Song s26 = new Song("Transportin'", "Kodak Black", Genre.RAP, 2017,3.50, Explicit.YES, "Project Baby Two", 5, "4.1 MB", "2:49", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s26);
+               Song s27 = new Song("Moonlight", "City XXXTENTACION", Genre.HIPHOP, 2018, 3.50, Explicit.NO, "?", 2, "3.5 MB", "2:39", Country.UNITED_STATES, MusicVideo.NO);
+               songList.add(s27);
+               Song s28 = new Song("Do For Love", "2PAC", Genre.RAP, 1997,1.00, Explicit.YES, "R U Still Down?",4, "3 MB", "3:00", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s28);
+               Song s29 = new Song("Someone Like You'", "Adele", Genre.POP, 2011,4.50, Explicit.NO, "21", 5, "4.1 MB", "2:49", Country.UNITED_STATES, MusicVideo.YES);
+               songList.add(s29);
+               Song s30 = new Song("Don't Stop Believing", "Journey", Genre.ROCK, 1981, 3.22, Explicit.NO, "Escape", 4, "3.5 MB", "4:45", Country.UNITED_STATES, MusicVideo.NO);
+               songList.add(s30);
 
-                 
-
-Song s1 = new Song("Baby Be Mine", "Michael Jackson", Genre.POP, 1982, 2.50, Explicit.NO, "Thriller", 3, "5 MB", "3:21", Country.UNITED_STATES, MusicVideo.YES);
-songList.add(s1);
-Song s2 = new Song("The Girl is Mine", "Michael Jackson", Genre.POP, 1982, 2.00, Explicit.NO, "Thriller", 3, "5 MB", "1:30", Country.UNITED_STATES, MusicVideo.YES);
-songList.add(s2);
-Song s3 = new Song("Beat It", "Michael Jackson", Genre.ROCK, 1982, 3.50, Explicit.YES, "Thriller", 3, "2 MB", "3:45", Country.UNITED_STATES, MusicVideo.YES);
-songList.add(s3);
-Song s4 = new Song("Champion", "Kanye West", Genre.RAP, 2007, 1.75, Explicit.YES, "Graduation", 3, "2 MB", "3:15", Country.UNITED_STATES, MusicVideo.YES);
-songList.add(s4);
-Song s5 = new Song("Good Morning", "Kanye West", Genre.RAP, 2007,1.00, Explicit.YES, "Graduation", 2, "2 MB", "2:28", Country.UNITED_STATES, MusicVideo.YES);
-songList.add(s5);            
-Song s6 = new Song("Stronger", "Kanye West", Genre.RAP, 2007,4.00, Explicit.YES, "Graduation", 4, "2 MB", "5:11", Country.UNITED_STATES, MusicVideo.YES);
-songList.add(s6);
-Song s7 = new Song("Portland", "Drake, Quavo, Travis Scott", Genre.RAP, 2017,1.00, Explicit.YES, "More Life", 5, "3 MB", "3:55", Country.UNITED_STATES, MusicVideo.YES);
-songList.add(s7);
-Song s8 = new Song("Fake Love", "Drake", Genre.RAP, 2017,3.25, Explicit.YES, "More Life", 5, "1 MB", "1:47", Country.UNITED_STATES, MusicVideo.YES);
-songList.add(s8);
-Song s9 = new Song("Stir Fry", "Migos", Genre.RAP, 2018, 2.25, Explicit.YES, "Culture II", 2, "2.5 MB", "3:10", Country.UNITED_STATES, MusicVideo.YES);
-songList.add(s9);
-Song s10 = new Song("Bodak Yellow", "Cardi B", Genre.RAP, 2017,3.50, Explicit.YES, "Bodak Yellow", 2, "3 MB", "3:43", Country.UNITED_STATES, MusicVideo.YES);
-songList.add(s10);
-
-
-Song s11 = new Song("Fake Love", "Drake", Genre.RAP, 2017,3.25, Explicit.YES, "More Life", 5, "1 MB", "1:47", Country.UNITED_STATES, MusicVideo.YES);
-
-songList.add(s11);
-
-Song s12 = new Song("Ransom", "Lil' Tecca", Genre.RAP, 2019, 1.25, Explicit.NO, "Ransom", 2, "3.7 MB", "2:11", Country.UNITED_STATES, MusicVideo.NO);
-
-songList.add(s12);
-            
- 
-Song s13 = new Song("Rocket Man", "Elton John", Genre.POP, 1972,4.50, Explicit.NO, "Honky Chateau", 5, "3 MB", "4:42", Country.UNITED_STATES, MusicVideo.YES);
-
-songList.add(s13);
-
-
-Song s14 = new Song("Tiny Dancer", "Elton John", Genre.POP, 1972,4.50, Explicit.NO, "Honky Chateau", 4, "2 MB", "6:17", Country.UNITED_STATES, MusicVideo.YES);
-
-songList.add(s14);
-
-Song s15 = new Song("Your Song", "Elton John", Genre.ROCK, 1970, 3.25, Explicit.NO, "Elton John", 3, "2.9 MB", "3:59", Country.UNITED_STATES, MusicVideo.NO);
-
-songList.add(s15);
- 
-Song s16 = new Song("Speed It Up", "Gunna", Genre.RAP, 2019,4.00, Explicit.YES, "Drip or Drown 2", 5, "3 MB", "4:42", Country.UNITED_STATES, MusicVideo.YES);
-
-songList.add(s16);
-
-
-Song s17 = new Song("EARFQUAKE", "Tyler, The Creator", Genre.RAP, 2019,2.50, Explicit.YES, "IGOR", 4, "1.9 MB", "3:10", Country.UNITED_STATES, MusicVideo.YES);
-
-songList.add(s17);
-
-Song s18 = new Song("U Say", "GoldLink & Tyler The Creator", Genre.RNB, 1970, 3.25, Explicit.NO, "Diaspora", 3, "3.2 MB", "3:21", Country.UNITED_STATES, MusicVideo.NO);
-
-songList.add(s18);
-
-Song s19 = new Song("Floor Seats", "A$AP Ferg", Genre.RAP, 2019,1.00, Explicit.YES, "Floor Seats", 2, "1 MB", "2:37", Country.UNITED_STATES, MusicVideo.YES);
-
-songList.add(s19);
-
-
-Song s20= new Song("Don't Waste My Time", "Krept & Konan", Genre.RAP, 2014,2.00, Explicit.YES, "Don't Waste My Time", 4, "1.9 MB", "3:10", Country.UNITED_STATES, MusicVideo.YES);
-
-songList.add(s20);
-
-Song s21 = new Song("Like a Prayer", "Madonna", Genre.POP, 1989, 5.00, Explicit.NO, "Like a Prayer", 5, "4.7 MB", "5:42", Country.UNITED_STATES, MusicVideo.NO);
-
-songList.add(s21);
-
-Song s22 = new Song("Floor Seats", "A$AP Ferg", Genre.RAP, 2019,1.00, Explicit.YES, "Floor Seats", 2, "1 MB", "2:37", Country.UNITED_STATES, MusicVideo.YES);
-
-songList.add(s22);
-
-
-Song s23= new Song("YMCA", "Village People", Genre.FUNK, 2002,2.00, Explicit.YES, "YMCA", 4, "2.1 MB", "4.44", Country.UNITED_STATES, MusicVideo.YES);
-
-songList.add(s23);
-
-Song s24 = new Song("Act Up", "City Girls", Genre.HIPHOP, 2019, 5.00, Explicit.NO, "Girl Code", 2, "2.7 MB", "2:39", Country.UNITED_STATES, MusicVideo.NO);
-
-songList.add(s24);
-
-Song s25 = new Song("Do For Love", "2PAC", Genre.RAP, 1997,1.00, Explicit.YES, "R U Still Down?",4, "3 MB", "3:00", Country.UNITED_STATES, MusicVideo.YES);
-
-songList.add(s25);
-
-
-Song s26 = new Song("Transportin'", "Kodak Black", Genre.RAP, 2017,3.50, Explicit.YES, "Project Baby Two", 5, "4.1 MB", "2:49", Country.UNITED_STATES, MusicVideo.YES);
-
-songList.add(s26);
-
-Song s27 = new Song("Moonlight", "City XXXTENTACION", Genre.HIPHOP, 2018, 3.50, Explicit.NO, "?", 2, "3.5 MB", "2:39", Country.UNITED_STATES, MusicVideo.NO);
-
-songList.add(s27);
-
-Song s28 = new Song("Do For Love", "2PAC", Genre.RAP, 1997,1.00, Explicit.YES, "R U Still Down?",4, "3 MB", "3:00", Country.UNITED_STATES, MusicVideo.YES);
-
-songList.add(s28);
-
-
-Song s29 = new Song("Someone Like You'", "Adele", Genre.POP, 2011,4.50, Explicit.NO, "21", 5, "4.1 MB", "2:49", Country.UNITED_STATES, MusicVideo.YES);
-
-songList.add(s29);
-
-Song s30 = new Song("Don't Stop Believing", "Journey", Genre.ROCK, 1981, 3.22, Explicit.NO, "Escape", 4, "3.5 MB", "4:45", Country.UNITED_STATES, MusicVideo.NO);
-
-songList.add(s30);
-
+                  for (int i = 0 ; i < songList.getRecordList().size() ; i++) {
+                              songList.getRecordList().get(i).setCatalogNumber(i+1);
+                  }
+               //Adding Songs to text file
                 Path p = Paths.get("C:\\Users\\porti\\OneDrive\\Documents\\NetBeansProjects\\New Folder\\Java2GUI\\JBManager.txt");
                 
                     String s="";
@@ -254,11 +210,11 @@ songList.add(s30);
                          s += System.lineSeparator() + songList.getRecordList().get(i).toString();
                   }
 
-    try (BufferedWriter writer = Files.newBufferedWriter(p, StandardOpenOption.APPEND)) {
-    writer.write(s);
-} catch (IOException ioe) {
-    System.err.format("IOException: %s%n", ioe);
-}
+                    try (BufferedWriter writer = Files.newBufferedWriter(p, StandardOpenOption.APPEND)) {
+                    writer.write(s);
+                } catch (IOException ioe) {
+                    System.err.format("IOException: %s%n", ioe);
+                }
 
 
                   
@@ -320,7 +276,6 @@ songList.add(s30);
                           buttons.getChildren().add(btAddNew);
                           buttons2.getChildren().add(btSearch);
                           buttons2.getChildren().add(btExit);
-//                          buttons2.getChildren().add(btEdit);
                           buttons.setAlignment(Pos.BASELINE_CENTER);
                           buttons.setPrefWidth(100);
                           buttons2.setAlignment(Pos.BASELINE_CENTER);
@@ -374,7 +329,11 @@ songList.add(s30);
                                                                   tfAlbum.setText(songList.getRecordList().get(i).getAlbumName());
                                                                  tfArtist.setText(songList.getRecordList().get(i).getSongArtist());
                                                                  tfSong.setText(songList.getRecordList().get(i).getSongTitle());
-                                                                  
+                                                                 cbGenre.getSelectionModel().select(songList.getRecordList().get(i).getGenre());
+                                                                 cbCountry.getSelectionModel().select(songList.getRecordList().get(i).getCountry());
+                                                                 cbYear.getSelectionModel().select(songList.getRecordList().get(i).getYear());
+                                                                 cbPrice.getSelectionModel().select(songList.getRecordList().get(i).getPrice());
+                                                                 
                                                                   }
                                        
                                                     lv.refresh();
@@ -408,7 +367,47 @@ songList.add(s30);
                                editSong(song); 
                                   }); 
                           btSearchAI.setOnAction(a -> searchSong()); //Event processing for search
-                          btDeleteAI.setOnAction(s -> songList.getRecordList().remove(song));
+                          btDeleteAI.setOnAction(s -> {
+                                           Alert alert = new Alert(AlertType.CONFIRMATION);
+                                                       alert.setTitle("Delete Song?");
+                                                       alert.setHeaderText("Delete Song");
+                                                       alert.setContentText("Are you sure you want to delete # " + song.toString());
+                                                       ButtonType retry = new ButtonType("Yes");
+                                                       ButtonType retry2 = new ButtonType("No");
+                                                       alert.getButtonTypes().setAll(retry, retry2);
+                                                       
+
+                                                       alert.showAndWait().ifPresent(response -> {
+    if (response == retry) {
+              songList.getRecordList().remove(song);
+              
+                Alert alert2 = new Alert(AlertType.CONFIRMATION);
+                                                       alert2.setTitle("Delete Song?");
+                                                       alert2.setHeaderText("Your song has been deleted");
+                                                       
+                                 for (int i = 0 ; i < songList.getRecordList().size() ; i++) {
+                              songList.getRecordList().get(i).setCatalogNumber(i+1);
+                                      Path p = Paths.get("C:\\Users\\porti\\OneDrive\\Documents\\NetBeansProjects\\New Folder\\Java2GUI\\JBManager.txt");
+                
+                    String q="";
+                  for (int a = 0 ; a < songList.getRecordList().size() ; a++) {
+                         q += System.lineSeparator() + songList.getRecordList().get(a).toString();
+                         
+                                     try (BufferedWriter writer = Files.newBufferedWriter(p, StandardOpenOption.APPEND)) {
+                    writer.write(q);
+                } catch (IOException ioe) {
+                    System.err.format("IOException: %s%n", ioe);
+                }   }
+                                 lv.refresh();
+                                 alert2.show();
+                                 stageAI.close();
+    }
+                  }
+                  else if (response == retry2) {
+                       stageAI.show();
+}
+                                  });
+                          });
                           
                           paneAI.setPadding(new Insets(15)); //padding for main pane
                           gridPaneAI.setVgap(4);
@@ -475,7 +474,7 @@ songList.add(s30);
                           catNumAI.setText(Integer.toString(song.getCatalogNumber()));
                           songIDAI.setText(song.getSongID());
                           ratingAI.setText(Integer.toString(song.getRating()));
-                                   countryAI.setText(song.getCountry().getCountryName());
+                           countryAI.setText(song.getCountry().getCountryName());
                         mvAI.setText(song.getMusicVideo().name());
                         songTime.setText(song.getSongLength());
                          
@@ -503,7 +502,11 @@ songList.add(s30);
                                  prevSong(this.song2);
                                     });
                               }
-              }
+             }
+              
+                                                               
+                                  
+                                                               
              //Method to go to next song
              private void nextSong(Song song2) {
                           if (songList.getRecordList().indexOf(song2) == songList.getRecordList().size()-1) {
@@ -528,9 +531,7 @@ songList.add(s30);
                                         this.mvAI.setText(this.song2.getMusicVideo().name());
                                         this.genreAI.setText(this.song2.getGenre().name());
                                          this.explicitAI.setText(this.song2.getExplicit().name());
-                                        
-
-                                   
+                                         
                                                     btPrevAI.setOnAction(e ->{ 
                                           prevSong(this.song2); 
                     });
@@ -559,7 +560,6 @@ songList.add(s30);
                                         this.mvAI.setText(this.song2.getMusicVideo().name());
                                         this.genreAI.setText(this.song2.getGenre().name());
                                         this.explicitAI.setText(this.song2.getExplicit().name());
-
                                         
                             btNextAI.setOnAction(e ->{ 
                                  nextSong(this.song2);
@@ -611,8 +611,7 @@ songList.add(s30);
                           
                           vbAS.setPadding(new Insets(5));
      
-//                          lbYear.setPadding(new Insets(20));
-                         
+//                          lbYear.setPadding
                           allAS.getChildren().addAll(vbAS, vbAS2);
                          
                           //adding buttons to gridpane
@@ -686,42 +685,100 @@ songList.add(s30);
                           btCancelAS.setOnAction(e -> stageAS.close());
                           btSaveAs.setOnAction(e -> {  // Event processing for saving song, user must select save to add a song
                                {
-                                   String title = songAS.getText();
-                                   String artist = artistAS.getText();
-                                   String album = albumAS.getText();
-                                   double price = cbPrice.getValue();
-                                   Genre genre= cbGenre.getValue();
-                                   int years = cbYear.getValue();
-                                   Explicit explicit= cbExplicit.getValue();
-                                   int rating=cbRating.getValue();
-                                   String size="0";
-                                   String length= songTime.getText();
-                                   Country country= cbCountry.getValue();
-                                   MusicVideo mv= cbMV.getValue();
+                               try{
+                                        String title = songAS.getText();
+                                        String artist = artistAS.getText();
+                                        String album = albumAS.getText();
+                                        double price = cbPrice.getValue();
+                                        Genre genre= cbGenre.getValue();
+                                        int years = cbYear.getValue();
+                                        Explicit explicit= cbExplicit.getValue();
+                                        int rating=cbRating.getValue();
+                                        String size="0";
+                                        String length= songTime.getText();
+                                        Country country= cbCountry.getValue();
+                                        MusicVideo mv= cbMV.getValue();
+                                   
+                                        if (genre == null) {
+                                        Alert alert = new Alert(AlertType.ERROR);                            
+                                        alert.setTitle("Song NOT Added");
+                                        alert.setHeaderText("Song was not added to JukeBox Manager");
+                                        alert.setContentText("Please enter a genre.");
+                                        alert.showAndWait();
+                                                    }
+                                          
+                                        else if (explicit == null) {
+                                                    Alert alert = new Alert(AlertType.ERROR);                            
+                                                     alert.setTitle("Song NOT Added");
+                                                     alert.setHeaderText("Song was not added to JukeBox Manager");
+                                                     alert.setContentText("Please enter if song is explicit, or not.");
+                                                     alert.showAndWait();
+                                                                   }
                                  
-                                   
-                                   Song song = new Song(title, artist, genre,years, price, explicit, album, rating, size, length, country, mv);
-                                   
-                                   songList.add(song);
-                                   Path p = Paths.get("C:\\Users\\porti\\OneDrive\\Documents\\NetBeansProjects\\New Folder\\Java2GUI\\JBManager.txt");
-                
-                 String s = System.lineSeparator() + song.toString();
-
-    try (BufferedWriter writer = Files.newBufferedWriter(p, StandardOpenOption.APPEND)) {
-    writer.write(s);
-} catch (IOException ioe) {
-    System.err.format("IOException: %s%n", ioe);
-}
+                                       else if (country == null) {
+                                                    Alert alert = new Alert(AlertType.ERROR);                            
+                                                    alert.setTitle("Song NOT Added");
+                                                    alert.setHeaderText("Song was not added to JukeBox Manager");
+                                                    alert.setContentText("Please enter which country this song was released in.");
+                                                   alert.showAndWait();
+                                                    }
+                                     
+                                        else if (mv == null) {
+                                                    Alert alert = new Alert(AlertType.ERROR);                            
+                                                    alert.setTitle("Song NOT Added");
+                                                    alert.setHeaderText("Song was not added to JukeBox Manager");
+                                                    alert.setContentText("Please enter if this song has a music video or not.");
+                                                    alert.showAndWait();
+                                                    }
+                                        else if (cbYear == null) {
+                                                    Alert alert = new Alert(AlertType.ERROR);                            
+                                                    alert.setTitle("Song NOT Added");
+                                                    alert.setHeaderText("Song was not added to JukeBox Manager");
+                                                    alert.setContentText("Please enter if this song has a music video or not.");
+                                                    alert.showAndWait();
+                                                    }
+                                        else if (price == 0) {
+                                                    Alert alert = new Alert(AlertType.ERROR);                            
+                                                    alert.setTitle("Song NOT Added");
+                                                    alert.setHeaderText("Song was not added to JukeBox Manager");
+                                                    alert.setContentText("Please enter if this song has a music video or not.");
+                                                    alert.showAndWait();
+                                                    }
+                                        else {
+                                                     Song song = new Song(title, artist, genre,years, price, explicit, album, rating, size, length, country, mv);
+                                                     song.setCatalogNumber(songList.getRecordList().size()+1);
+                                                     songList.add(song);
+                                                     
+                                                     Path p = Paths.get("C:\\Users\\porti\\OneDrive\\Documents\\NetBeansProjects\\New Folder\\Java2GUI\\JBManager.txt");
+                                                     String s = System.lineSeparator() + song.toString();
+                                                     try (BufferedWriter writer = Files.newBufferedWriter(p, StandardOpenOption.APPEND)) {
+                                                                 writer.write(s);
+                                                                 } catch (IOException ioe) {
+                                                                      System.err.format("IOException: %s%n", ioe);
+                                                                 }
+                                                     
+                                                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                                                    alert.setTitle("Song added to JukeBox Manager");
+                                                    alert.setHeaderText( song.getSongTitle() + " - " + song.getSongArtist()+" has been added to JukeBox Manager!");
+                                                    alert.showAndWait();
+                                                    
                                    stageAS.close(); //after selecting save, add song screen will close
                                    stage.show(); // main stage will show
-                              }
-                           });
-
-              }
+                                         }
+                            } catch (Exception ioe) {
+                                                            Alert alert = new Alert(AlertType.ERROR);
+                                                       alert.setTitle("Song not added");
+                                                       alert.setHeaderText("Missing Value in one or more fields.");
+                                                       alert.setContentText("All fields are required. Complete all fields, and then save");
+                                                       alert.showAndWait();
+                                                     }
+                                        }     
+                          });
+             }               
              
              private void editSong(Song song) 
                  {
-                         Stage stageEdit = new Stage();
+                          Stage stageEdit = new Stage();
                           GridPane gpEdit = new GridPane();
                           StackPane paneTi = new StackPane(); //stackpane created to hold title
                           Label EI = new Label("Edit Song"); //Title  
@@ -731,8 +788,8 @@ songList.add(s30);
                           BorderPane gpEi3= new BorderPane();
                           BorderPane paneEI = new BorderPane(); // main pane holder to hold other panes
                           HBox vbEI = new HBox(10);
-                           HBox vbEI2 = new HBox(10);
-                           VBox vbAllEI= new VBox(10);
+                          HBox vbEI2 = new HBox(10);
+                          VBox vbAllEI= new VBox(10);
                            
                            TextField artistEdit = new TextField();   // text field values
                            TextField albumEdit = new TextField();
@@ -766,12 +823,8 @@ songList.add(s30);
                           btSaveAs.setFont(new Font("Sans Serif", 12));
                           btCancelAS.setFont(new Font("Sans Serif", 12));
                           
+                          
                           vbEI.setPadding(new Insets(5));
-     
-//                          lbYear.setPadding(new Insets(20));
-                         
-                          vbAllEI.getChildren().addAll(vbEI, vbEI2);
-                         
                           //adding buttons to gridpane
                           gpEdit.add(new Label("Title: "), 0, 0);
                           gpEdit.add(songEdit, 1, 0);
@@ -826,11 +879,10 @@ songList.add(s30);
                           gpEI.add(saveEI, 5, 0);
                           gpEI.add(btCancelAS, 5, 1);
                           gpEI.prefWidthProperty().bind(paneEI.widthProperty().subtract(2));
-                          
+                          vbAllEI.getChildren().addAll(vbEI, vbEI2);
                           gpEi3.setTop(gpEdit);
                           gpEi3.setCenter(gpEi2);
                           paneTi.getChildren().add(EI);
-
                           paneEI.setTop(paneTi);
                           paneEI.setCenter(gpEi3);
                           paneEI.setBottom(gpEI);
@@ -840,27 +892,38 @@ songList.add(s30);
                           stageEdit.setTitle("JukeBox Manager"); // Set title
                           stageEdit.setScene(scene2); // Place the scene in the stage
                           stageEdit.show(); // Display the stage
-                          
-//                          btEditAI.setOnAction(e -> editSong(song, stageAS)); 
-                          
+
                           saveEI.setOnAction(e ->  
                           {
-                                   song.setSongTitle(songEdit.getText());
-                                   song.setSongArtist(artistEdit.getText());
-                                   song.setGenre(cbGenre.getValue());
-                                   song.setSongLength(songLen.getText());
-                                   song.setYear(cbYear.getValue());
-                                   song.setPrice(cbPrice.getValue());
-                                   song.setExplicit(cbExplicit.getValue());
-                                   song.setAlbumName(albumEdit.getText());
-                                   song.setSize(sizeEdit.getText());
-                                   song.setCountry(cbCountry.getValue());
-                                   song.setMusicVideo(cbMV.getValue());
-                                   
-                                   stageEdit.close();
-                                   lv.refresh();
+                                try{
+                                        song.setSongTitle(songEdit.getText());
+                                        song.setSongArtist(artistEdit.getText());
+                                        song.setGenre(cbGenre.getValue());
+                                        song.setSongLength(songLen.getText());
+                                        song.setYear(cbYear.getValue());
+                                        song.setPrice(cbPrice.getValue());
+                                        song.setExplicit(cbExplicit.getValue());
+                                        song.setAlbumName(albumEdit.getText());
+                                        song.setSize(sizeEdit.getText());
+                                        song.setCountry(cbCountry.getValue());
+                                        song.setMusicVideo(cbMV.getValue());
+                                                       Alert alert = new Alert(AlertType.CONFIRMATION);
+                                                       alert.setTitle("Song Edit Successful");
+                                                       alert.setHeaderText( song.getSongTitle() + " - " + song.getSongArtist()+" has been changed!");
+                                                       alert.showAndWait();
+                                        stageEdit.close();
+                                        lv.refresh();
+                          }catch (Exception ioe) {
+                                                            Alert alert = new Alert(AlertType.ERROR);
+                                                       alert.setTitle("Song Edit Unsucessful");
+                                                       alert.setHeaderText("Missing Value in one or more fields.");
+                                                       alert.setContentText("All fields are required. Complete all fields, and then save");
+
+                                                       alert.showAndWait();
+                                                     }
                           });
-             }
+           
+                 }
 
              // Method used to look up a song
              private void searchSong ()
@@ -939,7 +1002,6 @@ songList.add(s30);
                          String songName = "";
                                        if (rbTitle.isSelected()) {
                                              Pattern pat= Pattern.compile((".*" + tfSearch.getText() + ".*"), Pattern.CASE_INSENSITIVE);
-                                             
                                              for (int i = 0 ; i < songList.getRecordList().size() ; i++) {
                                                   Matcher mat= pat.matcher(songList.getRecordList().get(i).getSongTitle());
                                                   if (mat.matches()) 
@@ -951,17 +1013,13 @@ songList.add(s30);
                            //if user searches by artist
                                         else if(rbArtist.isSelected()) {
                                           Pattern pat= Pattern.compile((".*" + tfSearch.getText() + ".*"), Pattern.CASE_INSENSITIVE);
-                                             
                                              for (int i = 0 ; i < songList.getRecordList().size() ; i++) {
-                                                  
                                                   Matcher mat= pat.matcher(songList.getRecordList().get(i).getSongArtist());
-                                                 
                                                   if (mat.matches()) 
                                                          songName+=songList.getRecordList().get(i).toString() + "\n\n";
                                                           continue;
                                                     }
                           tfSong.setText(songName);
-                          
                                         }
                                         else if (rbAlbum.isSelected()) {
                                                         Pattern pat= Pattern.compile((".*" + tfSearch.getText() + ".*"), Pattern.CASE_INSENSITIVE);
@@ -971,12 +1029,10 @@ songList.add(s30);
                                                          songName+=songList.getRecordList().get(i).toString() + "\n\n";
                                                           continue;
                                                     }
-                                                                 
                                                       tfSong.setText(songName);
                                                     }
             //   if user searches by genre
                                                                  else if (rbGenre.isSelected()) {
-                                                                
                                                                            for (int i = 0 ; i < songList.getRecordList().size() ; i++) {
                                                                                      if (songList.getRecordList().get(i).getGenre() == Genre.valueOf(tfSearch.getText())) 
                                                                                           songName += songList.getRecordList().get(i).getSongTitle() + " - " + songList.getRecordList().get(i).getSongArtist() + "\n\n";
