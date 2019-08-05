@@ -575,7 +575,8 @@ public class MainUi extends Application
                           StackPane paneTi = new StackPane(); //stackpane created to hold title
                           Label AI = new Label("Add Song"); //Title  
                           Font fontAI = new Font("Sans Serif", 50.0);
-                          GridPane gpAS = new GridPane();
+                          HBox gpAS = new HBox(40);
+                           BorderPane paneBT= new BorderPane();
                           GridPane gpAS2 = new GridPane();
                           BorderPane gpAS3= new BorderPane();
                           BorderPane paneAS = new BorderPane(); // main pane holder to hold other panes
@@ -585,14 +586,14 @@ public class MainUi extends Application
                            
                           //Formatting for panes and nodes
                           AI.setFont(fontAI);
-                          gridPaneAS.setVgap(4);
-                          paneAS.setPadding(new Insets(15)); //padding for add info screen
+                          gridPaneAS.setVgap(9);
+                          paneAS.setPadding(new Insets(10)); //padding for add info screen
                           artistAS.prefWidthProperty().bind(paneAS.widthProperty().subtract(100)); //binding text field width to screen width
+                          gridPaneAS.setPadding(new Insets(0,0,5,0));
                           gpAS2.setPadding(new Insets(4, 0,0,0));
                           gpAS2.setHgap(10);
-                          gpAS.setHgap(30);
-                          gpAS.setVgap(15);
-                          gpAS.setAlignment(Pos.CENTER);
+         
+
                            cbGenre.prefWidthProperty().bind(paneAS.widthProperty().divide(7));
                           cbYear.prefWidthProperty().bind(paneAS.widthProperty().divide(9));
                           cbExplicit.prefWidthProperty().bind(paneAS.widthProperty().divide(11));
@@ -600,14 +601,9 @@ public class MainUi extends Application
                           cbPrice.prefWidthProperty().bind(paneAS.widthProperty().divide(9));
                           cbCountry.prefWidthProperty().bind(paneAS.widthProperty().subtract(100));
                           cbRating.prefWidthProperty().bind(paneAS.widthProperty().subtract(100));
-                          btAddNewAS.setFont(new Font("Sans Serif", 12));
-                          btSearchAS.setFont(new Font("Sans Serif", 12));
-                          btEditAS.setFont(new Font("Sans Serif", 12));
-                          btNextAS.setFont(new Font("Sans Serif", 12));
-                          btDeleteAS.setFont(new Font("Sans Serif", 12));
-                          btPrevAS.setFont(new Font("Sans Serif", 12));
-                          btSaveAs.setFont(new Font("Sans Serif", 12));
-                          btCancelAS.setFont(new Font("Sans Serif", 12));
+                         
+                          btSaveAs.setFont(new Font("Sans Serif", 15));
+                          btCancelAS.setFont(new Font("Sans Serif", 15));
                           
                           vbAS.setPadding(new Insets(5));
      
@@ -658,15 +654,15 @@ public class MainUi extends Application
                           gpAS2.add(cbMV,9,0);
                           cbMV.getSelectionModel().clearSelection();
                           cbMV.setItems( FXCollections.observableArrayList( MusicVideo.values()));
-                          gpAS.add(btAddNewAS, 2, 0);
-                          gpAS.add(btSearchAS, 2, 1);
-                          gpAS.add(btEditAS, 1, 0);
-                          gpAS.add(btNextAS, 1, 1);
-                          gpAS.add(btDeleteAS, 4, 0);
-                          gpAS.add(btPrevAS, 4, 1);
-                          gpAS.add(btSaveAs, 5, 0);
-                          gpAS.add(btCancelAS, 5, 1);
+                          
                           gpAS.prefWidthProperty().bind(paneAS.widthProperty().subtract(2));
+                          gpAS.setPadding(new Insets(0,10,30,10));
+                      
+                            gpAS.getChildren().addAll(btCancelAS, btSaveAs);
+                            
+                            gpAS.setAlignment(Pos.CENTER);
+                            
+           
                           
                           gpAS3.setTop(gridPaneAS);
                           gpAS3.setCenter(gpAS2);
@@ -804,7 +800,7 @@ public class MainUi extends Application
                           StackPane paneTi = new StackPane(); //stackpane created to hold title
                           Label EI = new Label("Edit Song"); //Title  
                           Font fontEI = new Font("Sans Serif", 50.0);
-                          GridPane gpEI = new GridPane();
+                          HBox gpEI = new HBox(40);
                           GridPane gpEi2 = new GridPane();
                           BorderPane gpEi3= new BorderPane();
                           BorderPane paneEI = new BorderPane(); // main pane holder to hold other panes
@@ -825,9 +821,9 @@ public class MainUi extends Application
                           artistEdit.prefWidthProperty().bind(paneEI.widthProperty().subtract(100)); //binding text field width to screen width
                           gpEi2.setPadding(new Insets(4, 0,0,0));
                           gpEi2.setHgap(10);
-                          gpEI.setHgap(30);
-                          gpEI.setVgap(15);
+                          
                           gpEI.setAlignment(Pos.CENTER);
+                          gpEI.setPadding(new Insets(0,10,30,10));
                            cbGenre.prefWidthProperty().bind(paneEI.widthProperty().divide(7));
                           cbYear.prefWidthProperty().bind(paneEI.widthProperty().divide(9));
                           cbExplicit.prefWidthProperty().bind(paneEI.widthProperty().divide(11));
@@ -835,14 +831,9 @@ public class MainUi extends Application
                           cbPrice.prefWidthProperty().bind(paneEI.widthProperty().divide(9));
                           cbCountry.prefWidthProperty().bind(paneEI.widthProperty().subtract(100));
                           cbRating.prefWidthProperty().bind(paneEI.widthProperty().subtract(100));
-                          btAddNewAS.setFont(new Font("Sans Serif", 12));
-                          btSearchAS.setFont(new Font("Sans Serif", 12));
-                          btEditAS.setFont(new Font("Sans Serif", 12));
-                          btNextAS.setFont(new Font("Sans Serif", 12));
-                          btDeleteAS.setFont(new Font("Sans Serif", 12));
-                          btPrevAS.setFont(new Font("Sans Serif", 12));
-                          btSaveAs.setFont(new Font("Sans Serif", 12));
-                          btCancelAS.setFont(new Font("Sans Serif", 12));
+
+                          btSaveAs.setFont(new Font("Sans Serif", 15));
+                          btCancelAS.setFont(new Font("Sans Serif", 15));
                           
                           
                           vbEI.setPadding(new Insets(5));
@@ -891,14 +882,7 @@ public class MainUi extends Application
                           gpEi2.add(cbMV,9,0);
                           cbMV.getSelectionModel().select(song.getMusicVideo());
                           cbMV.setItems( FXCollections.observableArrayList( MusicVideo.values()));
-                          gpEI.add(btAddNewAS, 2, 0);
-                          gpEI.add(btSearchAS, 2, 1);
-                          gpEI.add(btEditAS, 1, 0);
-                          gpEI.add(btNextAS, 1, 1);
-                          gpEI.add(btDeleteAS, 4, 0);
-                          gpEI.add(btPrevAS, 4, 1);
-                          gpEI.add(saveEI, 5, 0);
-                          gpEI.add(btCancelAS, 5, 1);
+                          gpEI.getChildren().addAll(btCancelAS, btSaveAs);
                           gpEI.prefWidthProperty().bind(paneEI.widthProperty().subtract(2));
                           vbAllEI.getChildren().addAll(vbEI, vbEI2);
                           gpEi3.setTop(gpEdit);
@@ -913,7 +897,7 @@ public class MainUi extends Application
                           stageEdit.setTitle("JukeBox Manager"); // Set title
                           stageEdit.setScene(scene2); // Place the scene in the stage
                           stageEdit.show(); // Display the stage
-
+    btCancelAS.setOnAction(e -> stageEdit.close());
                           saveEI.setOnAction(e ->  
                           {
                                 try{
