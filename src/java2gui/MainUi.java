@@ -684,7 +684,7 @@ public class MainUi extends Application
                           
                           btCancelAS.setOnAction(e -> stageAS.close());
                           btSaveAs.setOnAction(e -> {  // Event processing for saving song, user must select save to add a song
-                               {
+                               
                                try{
                                         String title = songAS.getText();
                                         String artist = artistAS.getText();
@@ -762,19 +762,40 @@ public class MainUi extends Application
                                                     alert.setHeaderText( song.getSongTitle() + " - " + song.getSongArtist()+" has been added to JukeBox Manager!");
                                                     alert.showAndWait();
                                                     
+                                                    Alert alert12 = new Alert(AlertType.INFORMATION);
+                                                    alert12.setTitle("Add Song");
+                                                    alert12.setHeaderText("Would you like to add another song?");
+                                                    ButtonType yes = new ButtonType("yes");
+                                                    ButtonType no = new ButtonType("no");
+                                                    alert12.getButtonTypes().clear();
+                                                    alert12.getButtonTypes().addAll(yes, no);
+                                                    alert12.showAndWait().ifPresent(response -> {
+    if (response == yes) {
+         addSong(stage);
+    }
+    
+    else if(response == no){
+                                                    
+                                                    
                                    stageAS.close(); //after selecting save, add song screen will close
                                    stage.show(); // main stage will show
                                          }
-                            } catch (Exception ioe) {
+                            });
+                                        }
+                               
+                               }
+                                                            catch (Exception ioe) {
                                                             Alert alert = new Alert(AlertType.ERROR);
                                                        alert.setTitle("Song not added");
                                                        alert.setHeaderText("Missing Value in one or more fields.");
                                                        alert.setContentText("All fields are required. Complete all fields, and then save");
                                                        alert.showAndWait();
                                                      }
-                                        }     
-                          });
-             }               
+                                           
+                          
+             });
+                          }
+                                  
              
              private void editSong(Song song) 
                  {
