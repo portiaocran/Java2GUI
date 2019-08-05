@@ -372,7 +372,7 @@ public class MainUi extends Application
                                            Alert alert = new Alert(AlertType.CONFIRMATION);
                                                        alert.setTitle("Delete Song?");
                                                        alert.setHeaderText("Delete Song");
-                                                       alert.setContentText("Are you sure you want to delete # " + song.toString());
+                                                       alert.setContentText("Are you sure you want to delete # " + this.song2.toString());
                                                        ButtonType retry = new ButtonType("Yes");
                                                        ButtonType retry2 = new ButtonType("No");
                                                        alert.getButtonTypes().setAll(retry, retry2);
@@ -380,7 +380,7 @@ public class MainUi extends Application
 
                                                        alert.showAndWait().ifPresent(response -> {
     if (response == retry) {
-              songList.getRecordList().remove(song);
+              songList.getRecordList().remove(this.song2);
               
                 Alert alert2 = new Alert(AlertType.CONFIRMATION);
                                                        alert2.setTitle("Delete Song?");
@@ -418,12 +418,12 @@ public class MainUi extends Application
                           gpAI.setVgap(15);
                           gpAI.setAlignment(Pos.CENTER);
                           
-                          gridPaneAI.add(new Label("Artist : "), 0, 0);
-                          gridPaneAI.add(artistAI, 1, 0);
+                          gridPaneAI.add(new Label("Title : "), 0, 0);
+                          gridPaneAI.add(songAI, 1, 0);
                           gridPaneAI.add(new Label("Album: "), 0, 1);
                           gridPaneAI.add(albumAI, 1, 1);
-                          gridPaneAI.add(new Label("Song: "), 0, 2);
-                          gridPaneAI.add(songAI, 1, 2);
+                          gridPaneAI.add(new Label("Artist: "), 0, 2);
+                          gridPaneAI.add(artistAI, 1, 2);
                           gridPaneAI.add(new Label("Genre: "), 0, 3);
                           gridPaneAI.add(genreAI, 1, 3);
                           gridPaneAI.add(new Label("Year: "), 0, 4);
