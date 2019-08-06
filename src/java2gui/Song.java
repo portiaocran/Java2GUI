@@ -213,6 +213,59 @@ public class Song implements java.io.Serializable
       return song;
    }
 
+   public String toString2 ()
+   {
+      String song = "";
+         song += getSongTitle() + ",";
+         song += getSongArtist() + ",";
+         if (genre == Genre.BLUES) 
+             song+="BLUES" +",";
+               else if (genre == Genre.COUNTRY) 
+                    song+="COUNTRY" + ",";
+                else if (genre == Genre.ROCK) 
+                         song+="ROCK" +",";
+                      else if (genre == Genre.HIPHOP) 
+                          song+="HIPHOP" +",";
+                        else if (genre == Genre.RAP) 
+                              song+="RAP" + ",";
+                          else if (genre == Genre.RNB) 
+                                    song+="RNB" + ",";
+                              else if (genre == Genre.REGGAE) 
+                                              song+="REGGAE" + "," ;
+                                         else if (genre == Genre.SOUL) 
+                                                            song+="SOUL" + ",";
+                                             else if (genre == Genre.FOLK) 
+                                                            song+="FOLK" + ",";
+                                                      else if (genre == Genre.JAZZ) 
+                                                            song+="JAZZ" + ",";
+                                                      else if (genre == Genre.CLASSICAL) 
+                                                            song+="CLASSICAL" + ",";
+                                                      else if (genre == Genre.ELECTRONIC) 
+                                                            song+="ELECTRONIC" + ",";
+                                                            else if (genre == Genre.POP) 
+                                                                  song+="POP" + ",";
+         song += Integer.toString(year) + ",";
+          song += Double.toString(price) + ",";
+          if (explicit == Explicit.NO) 
+             song+= "NO" + ",";
+                    else song+="YES" + ",";
+             
+        
+         song += albumName + ",";
+         song+=Integer.toString(rating) + ",";
+         song+=size + ",";
+         song+= songLength +",";
+         if (country == Country.UNITED_STATES) {
+             song += "UNITED_STATES" + ",";
+        }
+          if (musicVideo == musicVideo.NO) 
+             song+= "NO";
+                    else song+="YES";
+
+      return song;
+      
+   }
+
 }
 
 

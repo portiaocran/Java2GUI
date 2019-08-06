@@ -1,0 +1,3 @@
+Let Me Love You,Mario,POP,1955,2.0,YES,Let Me Love You,0,2 MB,2:32,UNITED_STATES,YES
+Let It Burn,Usher,RNB,1950,3.0,NO,Confessions,4,2:22,0,UNITED_STATES,YES
+Me and U,Cassie,COUNTRY,1953,3.0,NO,Cassie,3,0,2:22,UNITED_STATES,NO
