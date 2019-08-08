@@ -2,24 +2,24 @@ package java2gui;
 /**
  * @author Portia Ocran
  */
-public class Song implements java.io.Serializable
+public class Song
 {
-   private transient String songTitle;
-   private transient String songArtist;
-   private transient String albumName;
-   private transient Genre genre;
-   private transient int year;
-   private transient double price;
-   private transient Explicit explicit;
-   private transient int catalogNumber;
+   private String songTitle;
+   private String songArtist;
+   private String albumName;
+   private Genre genre;
+   private int year;
+   private double price;
+   private Explicit explicit;
+   private int catalogNumber;
    private static int nextCatNum=1;
-   private transient int plays;
-   private transient int rating;
-   private transient String size;
-   private transient String songLength;
-   private transient String songID;
-   private transient Country country;
-   private transient MusicVideo musicVideo;
+   private int plays;
+   private int rating;
+   private String size;
+   private String songLength;
+   private String songID;
+   private Country country;
+   private MusicVideo musicVideo;
 
      public Song (String songTitle, String songArtist, Genre genre, int year, double price, Explicit explicit, String albumName, int rating, String size, String songLength, Country country, MusicVideo musicVideo)
      {
@@ -244,23 +244,38 @@ public class Song implements java.io.Serializable
                                                             song+="ELECTRONIC" + ",";
                                                             else if (genre == Genre.POP) 
                                                                   song+="POP" + ",";
-         song += Integer.toString(year) + ",";
-          song += Double.toString(price) + ",";
-          if (explicit == Explicit.NO) 
-             song+= "NO" + ",";
-                    else song+="YES" + ",";
+                                                                 else if (genre == Genre.FUNK) 
+                                                                            song+="FUNK" + ",";
+                                                                             else if (genre == Genre.RELIGIOUS) 
+                                                                                song+="RELIGIOUS" + ",";
+                                                                                     else if (genre == Genre.DANCEHALL) 
+                                                                                           song+="DANCEHALL" + ",";
+                                                                                               else if (genre == Genre.SOCA) 
+                                                                                                    song+="SOCA" + ",";
+                                                                                                      else if (genre == Genre.INTERNATIONAL) 
+                                                                                                                song+="INTERNATIONAL" + ",";
+            song += Integer.toString(year) + ",";
+            song += Double.toString(price) + ",";
+                if (explicit == Explicit.NO) 
+                   song+= "NO" + ",";
+                          else song+="YES" + ",";
              
         
-         song += albumName + ",";
-         song+=Integer.toString(rating) + ",";
-         song+=size + ",";
-         song+= songLength +",";
-         if (country == Country.UNITED_STATES) {
-             song += "UNITED_STATES" + ",";
-        }
-          if (musicVideo == musicVideo.NO) 
-             song+= "NO";
-                    else song+="YES";
+            song += albumName + ",";
+            song+=Integer.toString(rating) + ",";
+            song+=size + ",";
+            song+= songLength +",";
+            if (country == Country.UNITED_STATES) 
+                    song += "UNITED_STATES" + ",";
+               else if (country == Country.UNITED_KINGDOM) 
+                         song += "UNITED_KINGDOM" + ",";
+                    else  if (country == Country.CANADA) 
+                         song += "CANADA" + ",";
+                         else
+                              song+="INTERNATIONAL" +",";
+                                if (musicVideo == MusicVideo.NO) 
+                                               song+= "NO";
+                                         else song+="YES";
 
       return song;
       

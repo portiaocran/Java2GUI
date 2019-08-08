@@ -4,7 +4,7 @@ import javafx.collections.ObservableList;
 /**
  * @author Portia Ocran
  */
-public class SongList implements java.io.Serializable
+public class SongList
 {
      
    private ObservableList<Song> recordList;

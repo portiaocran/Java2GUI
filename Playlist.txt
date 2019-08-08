@@ -1,3 +1,30 @@
-Let Me Love You,Mario,POP,1955,2.0,YES,Let Me Love You,0,2 MB,2:32,UNITED_STATES,YES
-Let It Burn,Usher,RNB,1950,3.0,NO,Confessions,4,2:22,0,UNITED_STATES,YES
-Me and U,Cassie,COUNTRY,1953,3.0,NO,Cassie,3,0,2:22,UNITED_STATES,NO
+YMCA,Village People,FUNK,1974,2.0,YES,YMCA,5,4:44,2.1 MB,UNITED_STATES,YES
+Don't Stop Believing,Journey,ROCK,1990,3.0,NO,Escape,4,3.5MB,4:45,INTERNATIONAL,NO
+Feather,Nujabes,JAZZ,1974,1.0,NO,Modal Soul,4,3.5MB,2:55,UNITED_KINGDOM,NO
+World's End Rhapsody,Nujabes,JAZZ,1974,1.0,NO,Modal Soul,3,3.5MB,5:41,UNITED_KINGDOM,NO
+Sherbet Sunset,LittleSimz,RAP,1974,2.5,YES,GreyArea,4,2.50MB,4:55,UNITED_KINGDOM,NO
+My Boy,Care Seat Headrest,ROCK,1974,2.0,NO,TwinFantasy,4,2.00MB,2:49,UNITED_KINGDOM,NO
+Sober to Death,Care Seat Headrest,ROCK,1974,2.0,NO,TwinFantasy,2,3.00MB,5:03,UNITED_KINGDOM,NO
+Famous Prophets,Care Seat Headrest,ROCK,1974,2.5,NO,Twin Fantasy,3,5.00MB,10:20,UNITED_KINGDOM,NO
+Pink Matter,Frank Ocean,RNB,1974,1.0,YES,Channe lOrange,5,3.25MB,4:28,UNITED_STATES,NO
+Super Rich Kids,Frank Ocean,RNB,1974,2.0,YES,Channel Orange,4,3.00 MB,5:04,UNITED_STATES,NO
+Crack Rock,Frank Ocean,RNB,1974,3.0,YES,Channel Orange,4,2.20 MB,3:44,UNITED_STATES,NO
+Nights,Frank Ocean,RNB,1974,3.0,YES,Blonde,4,3.20MB,5:07,UNITED_STATES,NO
+Jesus Walks,Kanye West,RAP,1974,2.0,YES,College Dropout,3,2MB,3:13,UNITED_STATES,YES
+Gone,Kanye West,RAP,1974,2.5,YES,Late Registration,4,5MB,6:03,UNITED_STATES,YES
+ShadowMen,NoName,SOUL,2016,2.0,YES,Telephone,5,5MB,5:11,UNITED_STATES,YES
+NorfNorf,VinceStaples,RAP,2006,1.0,YES,Summertime,3,3MB,3:03,UNITED_STATES,YES
+LIFE,Saba,RAP,1997,2.0,YES,Care For Me,4,5MB,2:42,UNITED_STATES,NO
+Beatit,Michael Jackson,POP,1997,2.5,NO,Thriller,5,5MB,4:18,UNITED_STATES,NO
+Stairway to Heaven,Led Zeppelin,ROCK,2005,2.0,NO,Led Zeppelin 4,5,10MB,7:11,UNITED_KINGDOM,NO
+Nosetalgia,PushaT,RAP,2011,1.5,YES,My Name is My Name,4,4MB,3:36,UNITED_STATES,YES
+How Much A Dollar Costs,Kendrick Lamar,RAP,2011,2.0,YES,To Pimp A Butterfly,5,5MB,5:12,UNITED_STATES,YES
+Gianis,Freddie Gibbs,RAP,2011,2.0,YES,Bandana,4,5MB,3:18,UNITED_STATES,NO
+Bleach,Brockhampton,POP,2018,1.0,YES,Saturation3,4,5MB,6:15,UNITED_STATES,NO
+Champion,Kanye West,POP,2019,1.0,YES,Graduation,3,2MB,3:15,UNITED_STATES,YES
+Good Morning,Kanye West,POP,2019,1.0,YES,Graduation,3,2MB,2:28,UNITED_STATES,YES
+Stronger,KanyeWest,RAP,2007,1.0,YES,Graduation,3,4MB,5:11,UNITED_STATES,YES
+EARFQUAKE,Tyler the Creator,RAP,2019,2.5,YES,IGOR,4,3MB,3:10,UNITED_STATES,NO
+U Say,Gold Link & Tyler the Creator,RNB,2019,2.5,YES,Diaspora,3,3MB,3:21,CANADA,NO
+You Can Call Me Al,Paul Simon,POP,1986,3.5,NO,Graceland,5,0,1:22,CANADA,YES
+I Have Nothing,Whitney Houston,SOUL,1993,3.5,NO,The Bodyguard Soundtrack,5,0,2:22,UNITED_STATES,YES
